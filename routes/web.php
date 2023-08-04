@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\OwnersController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroundsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +18,11 @@ use App\Http\Controllers\CalculosController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('/calculos', CalculosController::class);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('/propietarios', OwnersController::class);
+Route::resource('propietarios.terrenos', GroundsController::class)->only(['index', 'store', 'create']);
+Route::resource('terrenos.calculos', CalculosController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

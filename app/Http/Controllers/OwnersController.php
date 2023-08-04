@@ -2,36 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Terreno;
+use App\Http\Requests\CreateOwnerRequest;
+use App\Models\Propietario;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
-class CalculosController extends Controller
+class OwnersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-
+        $owners = Propietario::all();
+        return Inertia::render('Owners/Index', [
+            'owners' => $owners
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Terreno $terreno)
+    public function create(): Response
     {
-        return Inertia::render('Calculos/Create',[
-            'ground' => $terreno
-        ]);
+        return Inertia::render('Owners/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateOwnerRequest $request): RedirectResponse
     {
-        //
+        Propietario::create($request->validated());
+        return redirect()->route('owners.index');
     }
 
     /**
