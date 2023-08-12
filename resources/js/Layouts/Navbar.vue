@@ -8,54 +8,6 @@ import {Link} from '@inertiajs/vue3';
     border-color: rgba(55, 65, 81);
 }
 
-.dark .dark\:bg-gray-50 {
-    background-color: rgba(249, 250, 251);
-}
-
-.dark .dark\:bg-gray-100 {
-    background-color: rgba(243, 244, 246);
-}
-
-.dark .dark\:bg-gray-600 {
-    background-color: rgba(75, 85, 99);
-}
-
-.dark .dark\:bg-gray-700 {
-    background-color: rgba(55, 65, 81);
-}
-
-.dark .dark\:bg-gray-800 {
-    background-color: rgba(31, 41, 55);
-}
-
-.dark .dark\:bg-gray-900 {
-    background-color: rgba(17, 24, 39);
-}
-
-.dark .dark\:bg-red-700 {
-    background-color: rgba(185, 28, 28);
-}
-
-.dark .dark\:bg-green-700 {
-    background-color: rgba(4, 120, 87);
-}
-
-.dark .dark\:hover\:bg-gray-200:hover {
-    background-color: rgba(229, 231, 235);
-}
-
-.dark .dark\:hover\:bg-gray-600:hover {
-    background-color: rgba(75, 85, 99);
-}
-
-.dark .dark\:hover\:bg-gray-700:hover {
-    background-color: rgba(55, 65, 81);
-}
-
-.dark .dark\:hover\:border-gray-800:hover {
-    border-color: rgba(31, 41, 55);
-}
-
 .dark .dark\:text-white {
     color: rgba(255, 255, 255);
 }
@@ -84,7 +36,7 @@ import {Link} from '@inertiajs/vue3';
             <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
                 <div
                     class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-                    <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"/>
+                    <img alt class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"/>
                     <span class="hidden md:block">ADMIN</span>
                 </div>
                 <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
