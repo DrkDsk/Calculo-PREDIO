@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\OwnersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OwnerGroundsController;
 use App\Http\Controllers\GroundsController;
 
 /*
@@ -21,7 +22,8 @@ use App\Http\Controllers\GroundsController;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('/propietarios', OwnersController::class);
-Route::resource('propietarios.terrenos', GroundsController::class)->only(['index', 'store', 'create']);
+Route::resource('/terrenos', GroundsController::class)->only(['index']);
+Route::resource('propietarios.terrenos', OwnerGroundsController::class)->only(['index', 'store', 'create']);
 Route::resource('terrenos.calculos', CalculosController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {

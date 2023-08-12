@@ -1,43 +1,151 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import {Link} from '@inertiajs/vue3';
 </script>
 
-<template>
-    <div id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-            <ul class="space-y-2 font-medium">
-                <li>
-                    <Link :href="route('dashboard')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                            <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
-                            <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
-                        </svg>
-                        <span class="ml-3">Dashboard</span>
-                    </Link>
-                </li>
+<style>
+/* Compiled dark classes from Tailwind */
+.dark .dark\:divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgba(55, 65, 81);
+}
 
-                <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"/>
-                        </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Terrenos</span>
-                    </a>
-                </li>
-                <li>
-                    <Link :href="route('owners.index')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                            <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                        </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Propietarios</span>
-                    </Link>
-                </li>
-            </ul>
+.dark .dark\:bg-gray-50 {
+    background-color: rgba(249, 250, 251);
+}
+
+.dark .dark\:bg-gray-100 {
+    background-color: rgba(243, 244, 246);
+}
+
+.dark .dark\:bg-gray-600 {
+    background-color: rgba(75, 85, 99);
+}
+
+.dark .dark\:bg-gray-700 {
+    background-color: rgba(55, 65, 81);
+}
+
+.dark .dark\:bg-gray-800 {
+    background-color: rgba(31, 41, 55);
+}
+
+.dark .dark\:bg-gray-900 {
+    background-color: rgba(17, 24, 39);
+}
+
+.dark .dark\:bg-red-700 {
+    background-color: rgba(185, 28, 28);
+}
+
+.dark .dark\:bg-green-700 {
+    background-color: rgba(4, 120, 87);
+}
+
+.dark .dark\:hover\:bg-gray-200:hover {
+    background-color: rgba(229, 231, 235);
+}
+
+.dark .dark\:hover\:bg-gray-600:hover {
+    background-color: rgba(75, 85, 99);
+}
+
+.dark .dark\:hover\:bg-gray-700:hover {
+    background-color: rgba(55, 65, 81);
+}
+
+.dark .dark\:hover\:border-gray-800:hover {
+    border-color: rgba(31, 41, 55);
+}
+
+.dark .dark\:text-white {
+    color: rgba(255, 255, 255);
+}
+
+/* Custom style */
+.header-right {
+    width: calc(100% - 3.5rem);
+}
+
+.sidebar:hover {
+    width: 16rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .header-right {
+        width: calc(100% - 16rem);
+    }
+}
+</style>
+
+<template>
+    <div class="dark">
+        <div
+            class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+            <!-- Header -->
+            <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
+                <div
+                    class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
+                    <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"/>
+                    <span class="hidden md:block">ADMIN</span>
+                </div>
+                <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
+                </div>
+            </div>
+            <!-- ./Header -->
+
+            <!-- Sidebar -->
+            <div
+                class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+                <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
+                    <ul class="flex flex-col py-4 space-y-1">
+                        <li class="px-5 hidden md:block">
+                            <div class="flex flex-row items-center h-8">
+                                <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Menú principal</div>
+                            </div>
+                        </li>
+                        <li>
+                            <Link :href="route('dashboard')" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Panel</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('propietarios.index')" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Propietarios</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('terrenos.index')" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Terrenos</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <a href="#"  class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Cálculos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-[#F1F5F9]">
+                <div class="container mx-auto pt-5 px-6">
+                    <slot/>
+                </div>
+            </main>
+            <!-- ./Sidebar -->
         </div>
     </div>
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-[#F1F5F9]">
-        <div class="container mx-auto pt-5 px-6">
-            <slot />
-        </div>
-    </main>
 </template>
