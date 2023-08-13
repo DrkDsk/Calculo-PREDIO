@@ -1,22 +1,17 @@
 <script setup>
-import Navbar from "@/Layouts/Navbar.vue";
 import {Link} from "@inertiajs/vue3";
+import Navbar from "@/Layouts/Navbar.vue";
+import Pagination from "@/Layouts/Pagination.vue";
 
-defineProps({
-    grounds : Object,
-    owner   : Object
+const props = defineProps({
+    grounds : Object
 })
 </script>
 
 <template>
     <Navbar>
-        <div class="mt-3 w-full flex flex-col items-center overflow-x-auto">
-            <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <Link :href="route('propietarios.terrenos.create', owner.id)" class="rounded-full p-3 bg-amber-600 hover:scale-110 hover:duration-150">
-                    Registrar terreno
-                </Link>
-            </div>
-            <table v-if="grounds.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
+        <div class="mt-3 w-full flex flex-col items-center">
+            <table v-if="grounds.data.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                 <thead class="text-left uppercase">
                 <tr class="text-white">
                     <th scope="col" class="text-center py-4">No.</th>
@@ -28,7 +23,7 @@ defineProps({
                 </tr>
                 </thead>
                 <tbody class="divide-y-8 divide-gray-100 border-gray-100">
-                <tr v-for="ground in grounds" class="bg-white" style="border-radius: 10px">
+                <tr v-for="ground in grounds.data" class="bg-white" style="border-radius: 10px">
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
                             <div class="font-medium text-gray-700">
@@ -83,6 +78,7 @@ defineProps({
             <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
                 <p>Sin registros de terrenos</p>
             </div>
+            <pagination class="mt-6" :links="grounds.links"></pagination>
         </div>
     </Navbar>
 </template>

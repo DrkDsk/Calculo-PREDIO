@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('owner_id');
             $table->string('direction');
-            $table->string('grant_number');
+            $table->string('grant_number')->nullable();
             $table->double('square_meter');
             $table->timestamps();
         });

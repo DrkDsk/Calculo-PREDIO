@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveBalanceRequest;
+use App\Models\Balance;
 use App\Models\Terreno;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
 class CalculosController extends Controller
@@ -29,9 +31,10 @@ class CalculosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SaveBalanceRequest $request)// : RedirectResponse
     {
-        //
+        Balance::create($request->validated());
+        return redirect()->route('propietarios.index');
     }
 
     /**
@@ -53,7 +56,7 @@ class CalculosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SaveBalanceRequest $request, string $id)
     {
         //
     }

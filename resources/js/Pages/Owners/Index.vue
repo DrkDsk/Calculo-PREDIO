@@ -14,7 +14,7 @@ const props = defineProps({
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <Link :href="route('propietarios.create')" class="rounded-full p-3 bg-emerald-600 hover:scale-110 hover:duration-150">
+                <Link :href="route('propietarios.create')" class="text-white rounded-full p-3 bg-emerald-600 hover:scale-110 hover:duration-150">
                     Registrar Propietario
                 </Link>
             </div>
@@ -26,7 +26,8 @@ const props = defineProps({
                     <th scope="col" class="text-center py-4">Apellidos</th>
                     <th scope="col" class="text-center py-4">Número telefónico</th>
                     <th scope="col" class="text-center py-4">RFC</th>
-                    <th scope="col" class="text-center py-4">Detalles</th>
+                    <th scope="col" class="text-center py-4">Terrenos</th>
+                    <th scope="col" class="text-center py-4">Ajustes</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y-8 divide-gray-100 border-gray-100">
@@ -82,6 +83,19 @@ const props = defineProps({
                                 </Link>
                                 <Link class="text-green-600" :href="route('propietarios.terrenos.index', owner.id)">
                                     Ver terrenos
+                                </Link>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="text-sm py-2 px-4 text-center">
+                            <div class="font-medium gap-3 flex flex-row">
+                                <Link class="text-green-500" :href="route('propietarios.edit', owner.id)">
+                                    Editar
+                                </Link>
+                                <Link class="text-red-600" :href="route('propietarios.terrenos.index', owner.id)">
+                                    Eliminar
                                 </Link>
                             </div>
                         </div>

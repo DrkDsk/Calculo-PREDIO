@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOwnerRequest;
+use App\Http\Requests\EditOwnerRequest;
 use App\Models\Propietario;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -50,17 +50,20 @@ class OwnersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Propietario $propietario): Response
     {
-        //
+        return Inertia::render('Owners/Edit', [
+            'owner' => $propietario
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditOwnerRequest $request, Propietario $propietario): RedirectResponse
     {
-        //
+        $propietario->update($request->validated());
+        return redirect()->route('propietarios.index');
     }
 
     /**
