@@ -11,9 +11,17 @@ use Illuminate\Http\RedirectResponse;
 
 class OwnerGroundsController extends Controller
 {
+
+    public function index(Propietario $propietario): Response
+    {
+        return Inertia::render('Owners/Grounds/Index',[
+            'grounds' => $propietario->grounds,
+            'owner'  => $propietario
+        ]);
+    }
     public function create(Propietario $propietario):Response
     {
-        return Inertia::render('Grounds/Create', [
+        return Inertia::render('Owners/Grounds/Create', [
             'owner' => $propietario
         ]);
     }
@@ -27,6 +35,6 @@ class OwnerGroundsController extends Controller
             'square_meter' => $request->validated('square_meter')
         ]);
 
-        return redirect()->route('owners.index');
+        return redirect()->route('propietarios.terrenos.index', $propietario->id);
     }
 }

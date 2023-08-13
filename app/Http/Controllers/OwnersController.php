@@ -16,7 +16,7 @@ class OwnersController extends Controller
      */
     public function index(): Response
     {
-        $owners = Propietario::all();
+        $owners = Propietario::paginate(10);
         return Inertia::render('Owners/Index', [
             'owners' => $owners
         ]);
@@ -36,7 +36,7 @@ class OwnersController extends Controller
     public function store(CreateOwnerRequest $request): RedirectResponse
     {
         Propietario::create($request->validated());
-        return redirect()->route('owners.index');
+        return redirect()->route('propietarios.index');
     }
 
     /**

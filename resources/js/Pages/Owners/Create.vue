@@ -11,7 +11,7 @@ const formOwner = useForm({
 })
 
 const saveOwner = () => {
-    formOwner.post(route('owners.store'),{})
+    formOwner.post(route('propietarios.store'),{})
 }
 
 </script>
@@ -21,8 +21,8 @@ const saveOwner = () => {
         <div class="flex flex-col items-start justify-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
             <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
                 <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
-                    <h4 class="w-full text-4xl font-medium leading-snug">Agregar Propietario</h4>
-                    <form @submit.prevent="saveOwner" class="relative w-full mt-6 space-y-8">
+                    <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Agregar Propietario</h4>
+                    <form @submit.prevent="saveOwner" class="relative w-full mt-6 space-y-8 text-black">
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Nombre</label>
                             <input v-model="formOwner.name" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el nombre">

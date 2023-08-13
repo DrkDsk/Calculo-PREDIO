@@ -30,23 +30,21 @@ import {Link} from '@inertiajs/vue3';
 
 <template>
     <div class="dark">
-        <div
-            class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+        <div class="min-h-screen flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-700 text-white">
             <!-- Header -->
-            <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
+            <div class="fixed w-full flex items-center justify-between h-14 text-white">
                 <div
                     class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
                     <img alt class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"/>
                     <span class="hidden md:block">ADMIN</span>
                 </div>
-                <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
-                </div>
+
             </div>
             <!-- ./Header -->
 
             <!-- Sidebar -->
             <div
-                class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+                class="min-h-screen flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
                 <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
                     <ul class="flex flex-col py-4 space-y-1">
                         <li class="px-5 hidden md:block">
@@ -92,8 +90,8 @@ import {Link} from '@inertiajs/vue3';
                     </ul>
                 </div>
             </div>
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-[#F1F5F9]">
-                <div class="container mx-auto pt-5 px-6">
+            <main class="flex-1 overflow-x-auto overflow-y-auto">
+                <div class="container mx-auto">
                     <slot/>
                 </div>
             </main>
