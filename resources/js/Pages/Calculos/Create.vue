@@ -1,14 +1,13 @@
 <script setup>
 
 import {router, useForm} from "@inertiajs/vue3";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import Navbar from "@/Layouts/Navbar.vue";
 
 const props = defineProps({
     ground : Object
 })
 
-const importePagar  = ref(0)
 const actualizacion = ref(0)
 const recargo       = ref(0)
 const inpcActual    = ref(0)
@@ -40,17 +39,23 @@ const formCalculation = useForm({
     tasaDeRecargo : 0
 })
 
-const getImport = () => {
-    inpcActual.value             = parseFloat(formCalculation.inpcActual)
-    inpcDePago.value             = parseFloat(formCalculation.inpcDePago)
-    importe.value                = round(parseFloat(formCalculation.importe))
-    tasaRecargo.value            = parseFloat(formCalculation.tasaDeRecargo)
-    let actualizacionPlusImporte = (importe.value * (inpcActual.value / inpcDePago.value))
+const importarTotal = computed(() => {
+    let inpcActual  = parseFloat(formCalculation.inpcActual)
+    let inpcDePago  = parseFloat(formCalculation.inpcDePago)
+    let importe     = round(parseFloat(formCalculation.importe))
+    let tasaRecargo = parseFloat(formCalculation.tasaDeRecargo)
+    let actualizacionPlusImporte = (importe * (inpcActual / inpcDePago))
 
-    actualizacion.value          = round(actualizacionPlusImporte - importe.value)
-    recargo.value                = round(actualizacionPlusImporte * tasaRecargo.value)
-    importePagar.value           = round(importe.value + actualizacion.value + recargo.value)
-}
+    let actualizacion          = round(actualizacionPlusImporte - importe)
+
+    if (!importe || !inpcActual || !inpcDePago || !tasaRecargo) {
+      return null;
+    }
+
+    let recargo                = round(actualizacionPlusImporte * tasaRecargo)
+
+    return round(importe + actualizacion + recargo)
+})
 
 const round = (number) => {
     const decimal = number % 1;
@@ -84,7 +89,7 @@ const saveOperation = () => {
             <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
                 <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                     <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
-                    <form @submit.prevent="getImport" class="relative w-full mt-6 space-y-8">
+                    <form class="relative w-full mt-6 space-y-8">
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Mes del cálculo</label>
                             <select v-model="mesSeleccionado" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
@@ -125,13 +130,13 @@ const saveOperation = () => {
                     </form>
                 </div>
             </div>
-            <div v-if="importePagar" class="ml-8 z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
+            <div v-if="importarTotal" class="ml-8 z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                 <h4 class="w-full text-4xl font-medium leading-snug">Resultados:</h4>
-                <h3 class="w-full text-xl font-medium leading-snug">Importe: <span class="text-yellow-600">{{round(formCalculation.importe) }}</span></h3>
+                <h3 class="w-full text-xl font-medium leading-snug">Importe: <span class="text-yellow-600">{{ round(formCalculation.importe) }}</span></h3>
                 <h3 class="w-full text-xl font-medium leading-snug">Actualización: <span class="text-blue-600">{{actualizacion}}</span></h3>
                 <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">{{recargo}}</span></h3>
                 <div class="linea-divisoria">
-                    <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span class="text-green-600">{{importePagar}}</span></h3>
+                    <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span class="text-green-600">{{importarTotal}}</span></h3>
                 </div>
                 <div class="flex flex-row justify-end w-full mt-4">
                     <button v-on:click="saveOperation" class="text-white w-full rounded-full bg-emerald-600 px-3 py-2">
