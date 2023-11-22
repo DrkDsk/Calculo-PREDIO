@@ -104,20 +104,20 @@ const saveOperation = () => {
                             </select>
                         </div>
                         <div class="relative">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INCP Actual ({{mesActual}})</label>
-                            <input v-model="formCalculation.inpcActual" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el nombre">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Actual ({{mesActual}})</label>
+                            <input v-model="formCalculation.inpcActual" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa la cantidad del INPC">
                         </div>
                         <div class="relative">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INCP Correspondiente ({{meses[mesSeleccionado-1]}})</label>
-                            <input v-model="formCalculation.inpcDePago" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresas el apellido paterno y materno">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Correspondiente ({{meses[mesSeleccionado-1]}})</label>
+                            <input v-model="formCalculation.inpcDePago" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa la cantidad del INPC Correspondiente">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Importe</label>
-                            <input v-model="formCalculation.importe" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el RFC">
+                            <input v-model="formCalculation.importe" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el importe">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Tasa de Recargo</label>
-                            <input v-model="formCalculation.tasaDeRecargo" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
+                            <input v-model="formCalculation.tasaDeRecargo" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa la tasa de recargo">
                         </div>
                         <div class="relative">
                             <button class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease">Calcular</button>
@@ -134,7 +134,7 @@ const saveOperation = () => {
                     <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span class="text-green-600">{{importePagar}}</span></h3>
                 </div>
                 <div class="flex flex-row justify-end w-full mt-4">
-                    <button v-on:click="saveOperation" class="text-white rounded-full bg-emerald-600 px-3 py-2">
+                    <button v-on:click="saveOperation" class="text-white w-full rounded-full bg-emerald-600 px-3 py-2">
                         Guardar registro
                     </button>
                 </div>

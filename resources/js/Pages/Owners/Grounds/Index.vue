@@ -10,7 +10,7 @@ defineProps({
 
 <template>
     <Navbar>
-        <div class="mt-3 w-full flex flex-col items-center overflow-x-auto">
+        <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
                 <Link :href="route('propietarios.terrenos.create', owner.id)" class="rounded-full p-3 bg-amber-600 hover:scale-110 hover:duration-150">
                     Registrar terreno
