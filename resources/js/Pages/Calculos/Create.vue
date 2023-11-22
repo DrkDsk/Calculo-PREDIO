@@ -8,8 +8,6 @@ const props = defineProps({
     ground : Object
 })
 
-const actualizacion = ref(0)
-const recargo       = ref(0)
 const inpcActual    = ref(0)
 const inpcDePago    = ref(0)
 const importe       = ref(0)
@@ -39,13 +37,39 @@ const formCalculation = useForm({
     tasaDeRecargo : 0
 })
 
+const recargo = computed(() => {
+  let inpcActual  = parseFloat(formCalculation.inpcActual)
+  let inpcDePago  = parseFloat(formCalculation.inpcDePago)
+  let importe     = round(parseFloat(formCalculation.importe))
+  let tasaRecargo = parseFloat(formCalculation.tasaDeRecargo)
+  let actualizacionPlusImporte = (importe * (inpcActual / inpcDePago))
+
+  if (!importe || !inpcActual || !inpcDePago || !tasaRecargo) {
+    return null;
+  }
+
+  return round(actualizacionPlusImporte * tasaRecargo)
+})
+
+const actualizacionTotal = computed(() => {
+  let inpcActual  = parseFloat(formCalculation.inpcActual)
+  let inpcDePago  = parseFloat(formCalculation.inpcDePago)
+  let importe     = round(formCalculation.importe)
+
+  if (!importe || !inpcActual || !inpcDePago) {
+    return null;
+  }
+
+  let actualizacionPlusImporte = (importe * (inpcActual / inpcDePago))
+  return round(actualizacionPlusImporte - importe)
+})
+
 const importarTotal = computed(() => {
     let inpcActual  = parseFloat(formCalculation.inpcActual)
     let inpcDePago  = parseFloat(formCalculation.inpcDePago)
     let importe     = round(parseFloat(formCalculation.importe))
     let tasaRecargo = parseFloat(formCalculation.tasaDeRecargo)
     let actualizacionPlusImporte = (importe * (inpcActual / inpcDePago))
-
     let actualizacion          = round(actualizacionPlusImporte - importe)
 
     if (!importe || !inpcActual || !inpcDePago || !tasaRecargo) {
@@ -71,9 +95,9 @@ const saveOperation = () => {
     router.post(route('terrenos.calculos.store', props.ground.id), {
         'ground_id'               : props.ground.id,
         'amount'                  : importe.value,
-        'updated_charge'          : actualizacion.value,
-        'surcharge'               : recargo.value,
-        'amount_to_pay'           : importePagar.value,
+        'updated_charge'          : actualizacionTotal,
+        'surcharge'               : recargo,
+        'amount_to_pay'           : importarTotal,
         'month_at_operation_date' : mesActual,
         'month_of_pay'            : meses[mesSeleccionado.value-1],
         'INCP_at_operation_date'  : inpcActual.value,
@@ -133,7 +157,7 @@ const saveOperation = () => {
             <div v-if="importarTotal" class="ml-8 z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                 <h4 class="w-full text-4xl font-medium leading-snug">Resultados:</h4>
                 <h3 class="w-full text-xl font-medium leading-snug">Importe: <span class="text-yellow-600">{{ round(formCalculation.importe) }}</span></h3>
-                <h3 class="w-full text-xl font-medium leading-snug">Actualización: <span class="text-blue-600">{{actualizacion}}</span></h3>
+                <h3 class="w-full text-xl font-medium leading-snug">Actualización: <span class="text-blue-600">{{actualizacionTotal}}</span></h3>
                 <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">{{recargo}}</span></h3>
                 <div class="linea-divisoria">
                     <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span class="text-green-600">{{importarTotal}}</span></h3>
