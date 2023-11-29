@@ -187,7 +187,7 @@ const saveOperation = () => {
                 <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span
                     class="text-green-600">{{ importarTotal }}</span></h3>
             </div>
-            <div v-if="titleButton" class="flex flex-row justify-end w-full mt-4">
+            <div v-if="importarTotal && titleButton" class="flex flex-row justify-end w-full mt-4">
                 <button v-on:click="saveOperation" class="text-white w-full rounded-full bg-emerald-600 px-3 py-2">
                     {{ titleButton }}
                 </button>

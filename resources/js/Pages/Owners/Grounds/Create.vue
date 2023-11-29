@@ -2,6 +2,7 @@
 
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
+import {computed} from "vue";
 
 const props = defineProps({
     owner : Object
@@ -15,6 +16,10 @@ const formGround = useForm({
 const saveGround = () => {
     formGround.post(route('propietarios.terrenos.store', props.owner.id),{})
 }
+
+const ableToSave = computed(() => {
+    return !Object.values(formGround.data()).some(field => !field)
+})
 
 </script>
 
@@ -46,7 +51,7 @@ const saveGround = () => {
                             <input v-model="formGround.square_meter"  type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa los metros cuadrados del terreno">
                         </div>
                         <div class="relative">
-                            <button class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease">Guardar</button>
+                            <button :disabled="!ableToSave" :class="ableToSave ? 'bg-blue-600 hover:bg-blue-500' : 'bg-gray-400 hover:bg-gray-500'" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 rounded-lg ease">Guardar</button>
                         </div>
                     </form>
                 </div>

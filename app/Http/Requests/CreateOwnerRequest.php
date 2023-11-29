@@ -24,7 +24,7 @@ class CreateOwnerRequest extends FormRequest
         return [
             'name'      => ['required'],
             'last_name' => ['required'],
-            'RFC'       => ['sometimes'],
+            'RFC'       => ['nullable', 'max:13', 'min:13'],
             'telephone' => ['sometimes']
         ];
     }
