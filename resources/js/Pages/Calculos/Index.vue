@@ -3,10 +3,15 @@
 import {Link} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
+import {deleteCalculo} from '@/utils/handleDeleteCalculo.js'
 
 const props = defineProps({
-    balances : Object
+    balances: Object
 })
+
+const handleDeleteCalculo = (balance_id) => {
+    deleteCalculo(balance_id)
+}
 </script>
 
 <template>
@@ -21,11 +26,6 @@ const props = defineProps({
                     <th scope="col" class="text-center py-4 px-4">Actualización</th>
                     <th scope="col" class="text-center py-4 px-4">Recargo</th>
                     <th scope="col" class="text-center py-4 px-4">Total</th>
-                    <th scope="col" class="text-center py-4">Mes</th>
-                    <th scope="col" class="text-center py-4">Mes de cálculo</th>
-                    <th scope="col" class="text-center py-4">INCP del mes de operación</th>
-                    <th scope="col" class="text-center py-4">INCP del mes aplicado</th>
-                    <th scope="col" class="text-center py-4">Tasa de recargo</th>
                     <th scope="col" class="text-center py-4">Ver</th>
                 </tr>
                 </thead>
@@ -81,50 +81,16 @@ const props = defineProps({
 
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ balance.month_at_operation_date }}
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ balance.month_of_pay }}
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                ${{ balance.INCP_at_operation_date }}
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                ${{ balance.INCP_applied }}
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                ${{ balance.surcharge_rate }}
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium">
-                                <Link class="text-blue-500" :href="route('balances.show', balance.id)">
+                            <div class="font-medium gap-4 flex flex-row justify-center">
+                                <Link class="text-white px-3 py-2 bg-blue-500 rounded-3xl"
+                                      :href="route('balances.show', balance.id)">
                                     Ver cálculo
                                 </Link>
+
+                                <button class="text-white px-3 py-2 bg-red-500 rounded-3xl"
+                                        v-on:click="handleDeleteCalculo(balance.id)">
+                                    Eliminar cálculo
+                                </button>
                             </div>
                         </div>
                     </td>

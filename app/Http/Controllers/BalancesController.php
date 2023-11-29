@@ -30,4 +30,15 @@ class BalancesController extends Controller
         $balance->update($request->validated());
         return redirect()->route('balances.index');
     }
+
+    public function destroy(Balance $balance): bool
+    {
+        try {
+            $balance->delete();
+
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
 }
