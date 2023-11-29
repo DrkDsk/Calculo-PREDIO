@@ -1,12 +1,21 @@
 <script setup>
 
-import { Link } from '@inertiajs/vue3';
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
+import LinkSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
+import LinkInfo from "@/Components/LinkInfo.vue";
+import LinkSuccess from "@/Components/LinkSuccess.vue";
+import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
+import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
+import {deleteOwner} from "@/utils/handleDeleteService.js";
 
 const props = defineProps({
     owners : Object
 })
+
+const handleDeleteOwner = (owner_id) => {
+    deleteOwner(owner_id)
+}
 
 </script>
 
@@ -14,9 +23,7 @@ const props = defineProps({
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <Link :href="route('propietarios.create')" class="text-white rounded-full p-3 bg-emerald-600 hover:scale-110 hover:duration-150">
-                    Registrar Propietario
-                </Link>
+                <LinkSuccess4xl :route-name="route('propietarios.create')" title="Registrar Propietario"></LinkSuccess4xl>
             </div>
             <table v-if="owners.data.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                 <thead class="text-left uppercase">
@@ -78,12 +85,10 @@ const props = defineProps({
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
                             <div class="font-medium flex flex-col">
-                                <Link class="text-blue-500" :href="route('propietarios.terrenos.create', owner.id)">
-                                    Asignar Terreno
-                                </Link>
-                                <Link class="text-green-600" :href="route('propietarios.terrenos.index', owner.id)">
-                                    Ver terrenos
-                                </Link>
+                                <LinkInfo class="text-blue-500" :route-name="route('propietarios.terrenos.create', owner.id)" title="Asignar Terreno">
+                                </LinkInfo>
+                                <LinkSuccess class="text-green-500" :route-name="route('propietarios.terrenos.index', owner.id)" title="Ver terrenos">
+                                </LinkSuccess>
                             </div>
                         </div>
                     </td>
@@ -91,19 +96,18 @@ const props = defineProps({
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
                             <div class="font-medium gap-3 flex flex-row">
-                                <Link class="text-green-500" :href="route('propietarios.edit', owner.id)">
-                                    Editar
-                                </Link>
-                                <Link class="text-red-600" :href="route('propietarios.terrenos.index', owner.id)">
-                                    Eliminar
-                                </Link>
+                                <LinkButtonInfo3xl :route-name="route('propietarios.edit', owner.id)" title="Editar">
+                                </LinkButtonInfo3xl>
+
+                                <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
+                                </ButtonDelete3xl>
                             </div>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <div v-else class="bg-cyan-800 p-6 rounded-3xl">
+            <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
                 <p>Sin registros de propietarios</p>
             </div>
             <pagination class="mt-6" :links="owners.links"></pagination>

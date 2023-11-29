@@ -69,8 +69,14 @@ class OwnersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Propietario $propietario): bool
     {
-        //
+        try {
+            $propietario->delete();
+            
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 }

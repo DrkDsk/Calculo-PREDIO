@@ -28,6 +28,35 @@ const deleteCalculo = (balance_id) => {
     })
 }
 
+const deleteOwner = (owner_id) => {
+    alertAction(
+        'Estás seguro de eliminar este usuario?',
+        'No podrás recuperarlo!',
+        'warning',
+        true,
+        "#3085d6",
+        "#d33",
+        "Sí, eliminarlo!"
+    ).then((result) => {
+        if (result.isConfirmed) {
+            try {
+                deleteAction('propietarios.destroy', owner_id)
+            } catch (e) {
+                alertAction(
+                    'Oops...',
+                    'Ha ocurrido un error!',
+                    'error',
+                    false,
+                    "#3085d6",
+                    null,
+                    "ok")
+                    .then(() => location.reload())
+            }
+        }
+    })
+}
+
 export {
-    deleteCalculo
+    deleteCalculo,
+    deleteOwner
 }

@@ -1,7 +1,7 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
+import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
 
 const props = defineProps({
     grounds : Object
@@ -18,7 +18,7 @@ const props = defineProps({
                     <th scope="col" class="text-center py-4">Dirección</th>
                     <th scope="col" class="text-center py-4">Número de Concesión</th>
                     <th scope="col" class="text-center py-4">Metros cuadrados</th>
-                    <th scope="col" class="text-center py-4">Usuario</th>
+                    <th scope="col" class="text-center py-4">Propietario</th>
                     <th scope="col" class="text-center py-4">Cálculo INCP</th>
                 </tr>
                 </thead>
@@ -65,10 +65,9 @@ const props = defineProps({
 
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium">
-                                <Link class="text-blue-500" :href="route('terrenos.calculos.create', ground.id)">
-                                    Realizar cálculo
-                                </Link>
+                            <div class="font-medium flex flex-row gap-3">
+                                <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
+                                </LinkButtonInfo3xl>
                             </div>
                         </div>
                     </td>

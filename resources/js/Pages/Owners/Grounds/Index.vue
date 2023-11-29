@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from "@/Layouts/Navbar.vue";
-import {Link} from "@inertiajs/vue3";
+import LinkButtonSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
+import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
 
 defineProps({
     grounds : Object,
@@ -12,9 +13,8 @@ defineProps({
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <Link :href="route('propietarios.terrenos.create', owner.id)" class="rounded-full p-3 bg-amber-600 hover:scale-110 hover:duration-150">
-                    Registrar terreno
-                </Link>
+                <LinkButtonSuccess4xl :route-name="route('propietarios.terrenos.create', owner.id)" title="Registrar terreno">
+                </LinkButtonSuccess4xl>
             </div>
             <table v-if="grounds.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                 <thead class="text-left uppercase">
@@ -69,11 +69,10 @@ defineProps({
                     </td>
 
                     <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium">
-                                <Link class="text-blue-500" :href="route('terrenos.calculos.create', ground.id)">
-                                    Realizar cálculo
-                                </Link>
+                        <div class="text-sm py-2 px-4 text-center items-center mx-auto flex flex-row justify-center">
+                            <div class="font-medium gap-3 flex flex-row justify-center w-full">
+                                <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
+                                </LinkButtonInfo3xl>
                             </div>
                         </div>
                     </td>

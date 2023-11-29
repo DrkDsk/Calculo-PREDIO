@@ -1,9 +1,10 @@
 <script setup>
 
-import {Link} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
-import {deleteCalculo} from '@/utils/handleDeleteCalculo.js'
+import {deleteCalculo} from '@/utils/handleDeleteService.js'
+import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
+import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
 
 const props = defineProps({
     balances: Object
@@ -12,6 +13,7 @@ const props = defineProps({
 const handleDeleteCalculo = (balance_id) => {
     deleteCalculo(balance_id)
 }
+
 </script>
 
 <template>
@@ -82,15 +84,11 @@ const handleDeleteCalculo = (balance_id) => {
                     <td>
                         <div class="text-sm py-2 px-4 text-center">
                             <div class="font-medium gap-4 flex flex-row justify-center">
-                                <Link class="text-white px-3 py-2 bg-blue-500 rounded-3xl"
-                                      :href="route('balances.show', balance.id)">
-                                    Ver cálculo
-                                </Link>
+                                <LinkButtonInfo3xl :route-name="route('balances.show', balance.id)" title="Ver cálculo">
+                                </LinkButtonInfo3xl>
 
-                                <button class="text-white px-3 py-2 bg-red-500 rounded-3xl"
-                                        v-on:click="handleDeleteCalculo(balance.id)">
-                                    Eliminar cálculo
-                                </button>
+                                <ButtonDelete3xl class="text-white px-3 py-2 bg-red-500 rounded-3xl" title="Eliminar cálculo" @delete="handleDeleteCalculo(balance.id)">
+                                </ButtonDelete3xl>
                             </div>
                         </div>
                     </td>
