@@ -60,7 +60,7 @@ import {Link} from '@inertiajs/vue3';
                     </ul>
                 </div>
             </aside>
-            <main class="flex-1 overflow-x-auto overflow-y-auto">
+            <main class="flex-1 overflow-y-hidden mr-4 md:mr-0">
                 <div class="container mx-auto">
                     <slot/>
                 </div>

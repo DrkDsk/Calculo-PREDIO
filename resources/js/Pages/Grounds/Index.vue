@@ -11,71 +11,73 @@ const props = defineProps({
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
-            <table v-if="grounds.data.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
-                <thead class="text-left uppercase">
-                <tr class="text-white">
-                    <th scope="col" class="text-center py-4">No.</th>
-                    <th scope="col" class="text-center py-4">Dirección</th>
-                    <th scope="col" class="text-center py-4">Número de Concesión</th>
-                    <th scope="col" class="text-center py-4">Metros cuadrados</th>
-                    <th scope="col" class="text-center py-4">Propietario</th>
-                    <th scope="col" class="text-center py-4">Cálculo INCP</th>
-                </tr>
-                </thead>
-                <tbody class="divide-y-8 divide-gray-100 border-gray-100">
-                <tr v-for="ground in grounds.data" class="bg-white" style="border-radius: 10px">
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ ground.id }}
+            <div class="w-11/12 flex flex-col">
+                <table v-if="grounds.data.length" class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
+                    <thead class="text-left uppercase">
+                    <tr class="text-white">
+                        <th scope="col" class="text-center py-4">No.</th>
+                        <th scope="col" class="text-center py-4">Dirección</th>
+                        <th scope="col" class="text-center py-4">Número de Concesión</th>
+                        <th scope="col" class="text-center py-4">Metros cuadrados</th>
+                        <th scope="col" class="text-center py-4">Propietario</th>
+                        <th scope="col" class="text-center py-4">Cálculo INCP</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y-8 divide-gray-100 border-gray-100">
+                    <tr v-for="ground in grounds.data" class="bg-white" style="border-radius: 10px">
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium text-gray-700">
+                                    {{ ground.id }}
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ ground.direction }}
+                        </td>
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium text-gray-700">
+                                    {{ ground.direction }}
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ ground.grant_number }}
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium text-gray-700">
+                                    {{ ground.grant_number }}
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ ground.square_meter }}
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium text-gray-700">
+                                    {{ ground.square_meter }}
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium text-gray-700">
-                                {{ ground.owner.name }} {{ground.owner.last_name}}
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium text-gray-700">
+                                    {{ ground.owner.name }} {{ground.owner.last_name}}
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td>
-                        <div class="text-sm py-2 px-4 text-center">
-                            <div class="font-medium flex flex-row gap-3">
-                                <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
-                                </LinkButtonInfo3xl>
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium flex flex-row gap-3">
+                                    <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
+                                    </LinkButtonInfo3xl>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
-                <p>Sin registros de terrenos</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
+                    <p>Sin registros de terrenos</p>
+                </div>
             </div>
             <pagination class="mt-6" :links="grounds.links"></pagination>
         </div>
