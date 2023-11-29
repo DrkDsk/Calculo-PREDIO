@@ -6,7 +6,7 @@ use App\Http\Requests\SaveBalanceRequest;
 use App\Models\Balance;
 use Inertia\Inertia;
 use Inertia\Response;
-use \Illuminate\Http\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 
 class BalancesController extends Controller
 {
@@ -28,6 +28,6 @@ class BalancesController extends Controller
     public function update(Balance $balance, SaveBalanceRequest $request): RedirectResponse
     {
         $balance->update($request->validated());
-        return redirect()->back();
+        return redirect()->route('balances.index');
     }
 }

@@ -11,13 +11,6 @@ use Inertia\Response;
 
 class CalculosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,6 +28,6 @@ class CalculosController extends Controller
     public function store(SaveBalanceRequest $request): RedirectResponse
     {
         Balance::create($request->validated());
-        return redirect()->route('propietarios.index');
+        return redirect()->route('balances.index');
     }
 }
