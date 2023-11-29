@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('grounds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('owner_id');
+            $table->foreignId('owner_id')
+            ->references('id')->on('owners')->onDelete('cascade');
             $table->string('direction');
             $table->string('grant_number')->nullable();
             $table->double('square_meter');

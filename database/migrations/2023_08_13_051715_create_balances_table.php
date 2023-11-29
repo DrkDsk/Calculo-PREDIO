@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('ground_id');
+            $table->foreignId('ground_id')
+                ->references('id')->on('grounds')
+                ->onDelete('cascade');
             $table->double('amount');
             $table->double('updated_charge');
             $table->double('surcharge');
