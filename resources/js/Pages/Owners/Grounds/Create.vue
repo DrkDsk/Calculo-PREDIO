@@ -31,11 +31,11 @@ const ableToSave = computed(() => {
                     <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Registrar Terreno</h4>
                     <form @submit.prevent="saveGround" class="relative w-full mt-6 space-y-8 text-black">
                         <div class="relative text-gray-400">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Nombre</label>
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium bg-white">Nombre</label>
                             <input v-model="owner.name" readonly  type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el nombre">
                         </div>
                         <div class="relative text-gray-400">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Apellidos</label>
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium bg-white">Apellidos</label>
                             <input v-model="owner.last_name" readonly type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresas el apellido paterno y materno">
                         </div>
                         <div class="relative">

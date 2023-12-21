@@ -37,11 +37,11 @@ const updateOwner = () => {
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">RFC</label>
-                            <input v-model="formOwner.RFC" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el RFC">
+                            <input type="text" minlength="12" maxlength="14" v-model="formOwner.RFC" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el RFC">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Número telefónico</label>
-                            <input v-model="formOwner.telephone" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
+                            <input type="tel" minlength="10" maxlength="10" v-model="formOwner.telephone" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
                         </div>
                         <div class="relative">
                             <button type="submit" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease">Guardar</button>

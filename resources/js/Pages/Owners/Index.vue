@@ -85,9 +85,7 @@ const handleDeleteOwner = (owner_id) => {
 
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium flex flex-col">
-                                    <LinkInfo class="text-blue-500" :route-name="route('propietarios.terrenos.create', owner.id)" title="Asignar Terreno">
-                                    </LinkInfo>
+                                <div class="font-medium flex flex-col gap-3">
                                     <LinkSuccess class="text-green-500" :route-name="route('propietarios.terrenos.index', owner.id)" title="Ver terrenos">
                                     </LinkSuccess>
                                 </div>
