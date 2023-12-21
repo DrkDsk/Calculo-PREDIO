@@ -1,6 +1,5 @@
 <script setup>
 
-import InputError from "@/Components/InputError.vue";
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
 import {computed, ref} from "vue";
@@ -12,23 +11,16 @@ const formOwner = useForm({
     RFC : ''
 })
 
-const RFCNotValidMessage = ref('')
-const phoneNumberInvalidMessage = ref('')
-
 const saveOwner = () => {
-    /*const formData = formOwner.data()
-    RFCNotValidMessage.value =  formData.RFC.length !== 13 ? 'Formato de RFC Inválido' : ''
-    phoneNumberInvalidMessage.value = formData.telephone.length !== 10 ? 'Formato de Número telefónico inválido' : ''
-
-    if (RFCNotValidMessage.value || phoneNumberInvalidMessage.value) {
-        return null
-    }*/
-
     formOwner.post(route('propietarios.store'),{})
 }
 
 const ableToSave = computed(() => {
-    return !Object.values(formOwner.data()).some(field => !field)
+    const RFCValid = formOwner.data().RFC
+    const nameValid = formOwner.data().name
+    const lastNameValid = formOwner.data().last_name
+
+    return !!(RFCValid && nameValid && lastNameValid);
 })
 
 </script>
@@ -50,13 +42,11 @@ const ableToSave = computed(() => {
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">RFC</label>
-                            <input v-model="formOwner.RFC" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el RFC">
-                            <InputError class="mt-2" :message="RFCNotValidMessage" />
+                            <input type="text" minlength="12" maxlength="14" v-model="formOwner.RFC" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa el RFC">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Número telefónico</label>
-                            <input v-model="formOwner.telephone" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
-                            <InputError class="mt-2" :message="phoneNumberInvalidMessage" />
+                            <input type="tel" minlength="10" maxlength="10" v-model="formOwner.telephone" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
                         </div>
                         <div class="relative">
                             <button :disabled="!ableToSave" :class="ableToSave ? 'bg-blue-600 hover:bg-blue-500' : 'bg-gray-400 hover:bg-gray-500'" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 rounded-lg ease">Guardar</button>
