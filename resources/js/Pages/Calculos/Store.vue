@@ -9,7 +9,8 @@ const props = defineProps({
     id: null,
     updateView: Boolean,
     titleButton: String,
-    routeName: String
+    routeName: String,
+    years: Object
 })
 
 const meses = [
@@ -29,6 +30,7 @@ const meses = [
 
 const mesActual = meses[(new Date()).getMonth()];
 let mesSeleccionado = ref('');
+let anioSeleccionado = ref('');
 let inpcMesCorrespondiente = ref('')
 
 if (props.updateView) {
@@ -41,6 +43,15 @@ const formCalculation = useForm({
     inpcDePago: props.balance?.INCP_applied ?? 0,
     importe: props.balance?.amount ?? 0,
     tasaDeRecargo: props.balance?.surcharge_rate ?? 0
+})
+
+const tasaDeRecargo = computed(() => {
+    const yearsInTasaRecargo = props.years
+    const tasaRecargoSelected = yearsInTasaRecargo.find(year => {
+        return year.year == anioSeleccionado.value
+    })
+
+    return tasaRecargoSelected ? tasaRecargoSelected.value : null
 })
 
 const recargo = computed(() => {
@@ -118,58 +129,72 @@ const saveOperation = () => {
                 <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
                 <form class="relative w-full mt-6 space-y-8">
                     <div class="relative">
-                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Mes del
-                            cálculo</label>
-                        <div v-if="updateView" >
-                            <select v-model="mesSeleccionado"
-                                    class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                <option selected>{{balance.month_of_pay}}</option>
-                            </select>
+                        <div v-if="updateView">
+                            <div class="flex flex-row gap-2 bg-red-400">
+                                <select  v-model="mesSeleccionado"
+                                         class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                    <option selected>{{balance.month_of_pay}}</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div v-else>
-                            <select v-on:change="updateMesInpcCorrespondiente" v-model="mesSeleccionado"
-                                    class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                <option selected>Selecciona el mes del cálculo</option>
-                                <option value="1">Enero</option>
-                                <option value="2">Febrero</option>
-                                <option value="3">Marzo</option>
-                                <option value="4">Abril</option>
-                                <option value="5">Mayo</option>
-                                <option value="6">Junio</option>
-                                <option value="7">Julio</option>
-                                <option value="8">Agosto</option>
-                                <option value="9">Septiembre</option>
-                                <option value="10">Octubre</option>
-                                <option value="11">Noviembre</option>
-                                <option value="12">Diciembre</option>
-                            </select>
+                            <div class="flex flex-row gap-2">
+                                <div class="flex flex-col w-1/2">
+                                    <label class="font-medium text-gray-600 bg-white">Año del cálculo</label>
+                                    <select v-model="anioSeleccionado" class="block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                        <option v-for="year of years">
+                                            {{year.year}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col w-1/2">
+                                    <label class="font-medium text-gray-600 bg-white">Mes del cálculo</label>
+                                    <select v-on:change="updateMesInpcCorrespondiente" v-model="mesSeleccionado"
+                                            class="block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                        <option selected>Selecciona el mes del cálculo</option>
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="relative">
                         <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Actual
                             ({{ mesActual }})</label>
-                        <input v-model="formCalculation.inpcActual" type="text"
-                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcActual" type="text"
+                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC">
                     </div>
                     <div class="relative">
                         <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Correspondiente
                             ({{ inpcMesCorrespondiente }})</label>
-                        <input v-model="formCalculation.inpcDePago" type="text"
-                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcDePago" type="text"
+                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC Correspondiente">
                     </div>
                     <div class="relative">
                         <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Importe</label>
-                        <input v-model="formCalculation.importe" type="text"
-                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.importe" type="text"
+                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa el importe">
                     </div>
                     <div class="relative">
                         <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Tasa de
                             Recargo</label>
-                        <input v-model="formCalculation.tasaDeRecargo" type="text"
-                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="tasaDeRecargo" type="text"
+                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la tasa de recargo">
                     </div>
                 </form>

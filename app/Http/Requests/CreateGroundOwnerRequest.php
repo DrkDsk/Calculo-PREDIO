@@ -24,7 +24,8 @@ class CreateGroundOwnerRequest extends FormRequest
         return [
             'direction'    => ['required'],
             'grant_number' => ['required'],
-            'square_meter' => ['required']
+            'square_meter' => ['required'],
+            'type' => ['required']
         ];
     }
 }

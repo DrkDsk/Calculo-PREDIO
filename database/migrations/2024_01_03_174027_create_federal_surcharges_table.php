@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grounds', function (Blueprint $table) {
+        Schema::create('federal_surcharges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')
-            ->references('id')->on('owners')->onDelete('cascade');
-            $table->string('direction');
-            $table->string('grant_number')->nullable();
-            $table->double('square_meter');
-            $table->enum('type', \App\Models\Terreno::TypesAllowed);
+            $table->integer('year');
+            $table->decimal('value', 5, 4);
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grounds');
+        Schema::dropIfExists('federal_surcharges');
     }
 };

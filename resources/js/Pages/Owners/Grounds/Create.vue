@@ -2,24 +2,23 @@
 
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
+    types: Object,
     owner : Object
 })
 
 const formGround = useForm({
     direction : '',
     grant_number : 0,
-    square_meter : 0
+    square_meter : 0,
+    type: '',
+    years: ''
 })
 const saveGround = () => {
     formGround.post(route('propietarios.terrenos.store', props.owner.id),{})
 }
-
-const ableToSave = computed(() => {
-    return !Object.values(formGround.data()).some(field => !field)
-})
 
 </script>
 
@@ -51,7 +50,14 @@ const ableToSave = computed(() => {
                             <input v-model="formGround.square_meter"  type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa los metros cuadrados del terreno">
                         </div>
                         <div class="relative">
-                            <button :disabled="!ableToSave" :class="ableToSave ? 'bg-blue-600 hover:bg-blue-500' : 'bg-gray-400 hover:bg-gray-500'" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 rounded-lg ease">Guardar</button>
+                            <select v-model="formGround.type" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                <option :value="type" v-for="type of types">
+                                    {{type}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="relative">
+                            <button class="bg-blue-500 inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 rounded-lg ease">Guardar</button>
                         </div>
                     </form>
                 </div>

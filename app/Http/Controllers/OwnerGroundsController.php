@@ -22,6 +22,7 @@ class OwnerGroundsController extends Controller
     public function create(Propietario $propietario):Response
     {
         return Inertia::render('Owners/Grounds/Create', [
+            'types' => Terreno::TypesAllowed,
             'owner' => $propietario
         ]);
     }
@@ -32,7 +33,8 @@ class OwnerGroundsController extends Controller
             'owner_id'     => $propietario->id,
             'direction'    => $request->validated('direction'),
             'grant_number' => $request->validated('grant_number'),
-            'square_meter' => $request->validated('square_meter')
+            'square_meter' => $request->validated('square_meter'),
+            'type' => $request->validated('type')
         ]);
 
         return redirect()->route('propietarios.terrenos.index', $propietario->id);
