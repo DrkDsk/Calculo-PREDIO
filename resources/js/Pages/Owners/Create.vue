@@ -2,7 +2,7 @@
 
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 
 const formOwner = useForm({
     name : '',

@@ -55,7 +55,7 @@ const tasaDeRecargo = computed(() => {
 })
 
 const recargo = computed(() => {
-    let tasaRecargo = formCalculation.tasaDeRecargo
+    let tasaRecargo = tasaDeRecargo.value
 
     if (!tasaRecargo) {
         return null;
@@ -193,9 +193,9 @@ const saveOperation = () => {
                     <div class="relative">
                         <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Tasa de
                             Recargo</label>
-                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="tasaDeRecargo" type="text"
-                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                               placeholder="Ingresa la tasa de recargo">
+                        <label class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                            {{tasaDeRecargo}}
+                        </label>
                     </div>
                 </form>
             </div>
