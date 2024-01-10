@@ -3,6 +3,11 @@
 import Navbar from "@/Layouts/Navbar.vue";
 import {useForm} from "@inertiajs/vue3";
 import {computed} from "vue";
+import TasaRecargoIndexComponent from "@/Pages/TasaRecargos/TasaRecargoIndexComponent.vue";
+
+const props = defineProps({
+    federalSurcharges: Object
+})
 
 const formSurcharge = useForm({
     year : '',
@@ -10,7 +15,11 @@ const formSurcharge = useForm({
 })
 
 const saveSurchargeRate = () => {
-    formSurcharge.post(route('surcharge.store'), {})
+    formSurcharge.post(route('surcharge.store'), {
+        onFinish: () => {
+            location.reload()
+        }
+    })
 }
 
 const ableToSave = computed(() => {
@@ -24,7 +33,7 @@ const ableToSave = computed(() => {
 
 <template>
    <Navbar>
-       <div class="flex flex-col items-start justify-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
+       <div class="flex flex-col items-start justify-center w-full px-10 lg:pt-20 lg:flex-row">
            <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
                <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                    <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Agregar Tasa de Recargo</h4>
@@ -43,6 +52,9 @@ const ableToSave = computed(() => {
                    </form>
                </div>
            </div>
+       </div>
+       <div class="mb-4">
+           <TasaRecargoIndexComponent :federal-surcharges="federalSurcharges"></TasaRecargoIndexComponent>
        </div>
    </Navbar>
 </template>
