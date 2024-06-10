@@ -2,7 +2,6 @@
 
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import {computed, ref} from "vue";
 
 const props = defineProps({
     types: Object,
@@ -50,6 +49,7 @@ const saveGround = () => {
                             <input v-model="formGround.square_meter"  type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa los metros cuadrados del terreno">
                         </div>
                         <div class="relative">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Tipo de propiedad</label>
                             <select v-model="formGround.type" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
                                 <option :value="type" v-for="type of types">
                                     {{type}}

@@ -13,7 +13,7 @@ defineProps({
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <LinkButtonSuccess4xl :route-name="route('propietarios.terrenos.create', owner.id)" title="Registrar terreno">
+                <LinkButtonSuccess4xl :route-name="route('propietarios.terrenos.create', owner.id)" title="Registrar propiedad">
                 </LinkButtonSuccess4xl>
             </div>
             <table v-if="grounds.length" class="w-10/12 text-sm table-auto font-bold bg-cyan-900 rounded-lg">
