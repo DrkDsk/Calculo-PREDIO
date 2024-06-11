@@ -14,6 +14,8 @@ class Balance extends Model
         'amount',
         'updated_charge',
         'surcharge',
+        'year_at_operation_date',
+        'due_payment_year',
         'amount_to_pay',
         'month_at_operation_date',
         'month_of_pay',

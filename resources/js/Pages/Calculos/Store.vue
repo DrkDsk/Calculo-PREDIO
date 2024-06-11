@@ -38,7 +38,7 @@ if (props.updateView) {
 }
 
 const formCalculation = useForm({
-    current_year: props.balance?.year_at_operation_date ?? 0,
+    year_at_operation_date: props.balance?.year_at_operation_date ?? 0,
     due_payment_year: props.balance?.due_payment_year ?? 0,
     inpcActual: props.balance?.INCP_at_operation_date ?? 0,
     current_month: props.balance?.month_at_operation_date ?? 0,
@@ -100,15 +100,19 @@ const saveOperation = () => {
         'amount': formCalculation.importe,
         'updated_charge': actualizacion.value,
         'surcharge': recargo.value,
+        'year_at_operation_date' : formCalculation.year_at_operation_date,
+        'due_payment_year' : formCalculation.due_payment_year,
         'amount_to_pay': importarTotal.value,
         'month_at_operation_date': mesActual,
         'month_of_pay': inpcMesCorrespondiente.value,
         'INCP_at_operation_date': formCalculation.inpcActual,
         'INCP_applied': formCalculation.inpcDePago,
-        'surcharge_rate': formCalculation.tasaDeRecargo
+        'surcharge_rate': formCalculation.tasaDeRecargo,
     }
 
-    router.post(route(props.routeName, props.id), data)
+    console.log(data)
+
+    //router.post(route(props.routeName, props.id), data)
 }
 </script>
 
@@ -130,7 +134,7 @@ const saveOperation = () => {
                         <div v-else class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="font-medium text-gray-600 bg-white">Año del cálculo</label>
-                                <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.current_year" type="text"
+                                <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.year_at_operation_date" type="text"
                                        class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                        placeholder="Ingresa el año">
                             </div>
