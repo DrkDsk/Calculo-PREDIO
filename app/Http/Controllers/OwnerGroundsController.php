@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateGroundOwnerRequest;
+use App\Http\Requests\CreateGroundRequest;
 use App\Models\Terreno;
 use App\Models\Propietario;
 use Inertia\Inertia;
@@ -27,7 +27,7 @@ class OwnerGroundsController extends Controller
         ]);
     }
 
-    public function store(Propietario $propietario, CreateGroundOwnerRequest $request): RedirectResponse
+    public function store(Propietario $propietario, CreateGroundRequest $request): RedirectResponse
     {
         Terreno::create([
             'owner_id'     => $propietario->id,

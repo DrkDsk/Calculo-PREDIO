@@ -3,7 +3,6 @@
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
 import LinkSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
-import LinkInfo from "@/Components/LinkInfo.vue";
 import LinkSuccess from "@/Components/LinkSuccess.vue";
 import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
 import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
@@ -94,7 +93,7 @@ const handleDeleteOwner = (owner_id) => {
 
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium gap-3 flex flex-row">
+                                <div class="font-medium gap-3 flex flex-row justify-center">
                                     <LinkButtonInfo3xl :route-name="route('propietarios.edit', owner.id)" title="Editar">
                                     </LinkButtonInfo3xl>
 

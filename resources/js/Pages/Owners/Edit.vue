@@ -1,6 +1,7 @@
 <script setup>
 import {useForm} from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
+import SubmitButton from "@/Components/SubmitButton.vue";
 
 let props = defineProps({
     owner : Object
@@ -44,7 +45,7 @@ const updateOwner = () => {
                             <input type="tel" minlength="10" maxlength="10" v-model="formOwner.telephone" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
                         </div>
                         <div class="relative">
-                            <button type="submit" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-500 ease">Guardar</button>
+                            <SubmitButton title="Actualizar"/>
                         </div>
                     </form>
                 </div>

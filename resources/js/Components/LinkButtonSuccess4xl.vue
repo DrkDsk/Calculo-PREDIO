@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Link class="text-white rounded-full p-3 bg-emerald-600 hover:scale-110 hover:duration-150" :href="routeName">
+    <Link class="text-white rounded-md p-3 bg-emerald-600 hover:scale-110 hover:duration-150" :href="routeName">
         {{title}}
     </Link>
 </template>

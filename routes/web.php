@@ -24,12 +24,11 @@ use App\Http\Controllers\SurchargeController;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('propietarios', OwnersController::class);
-Route::resource('terrenos', GroundsController::class)->only(['index']);
+Route::resource('terrenos', GroundsController::class)->only(['index','edit','update']);
 Route::resource('propietarios.terrenos', OwnerGroundsController::class)->only(['index', 'store', 'create']);
 Route::resource('terrenos.calculos', CalculosController::class)->only(['index', 'create', 'store']);
 Route::resource('balances', BalancesController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('surcharge', SurchargeController::class)->only(['index', 'create', 'store']);
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

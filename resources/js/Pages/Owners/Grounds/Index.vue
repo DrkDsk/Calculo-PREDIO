@@ -24,7 +24,7 @@ defineProps({
                     <th scope="col" class="text-center py-4">Número de Concesión</th>
                     <th scope="col" class="text-center py-4">Metros cuadrados</th>
                     <th scope="col" class="text-center py-4">Tipo</th>
-                    <th scope="col" class="text-center py-4">Usuario</th>
+                    <th scope="col" class="text-center py-4">Propietario</th>
                     <th scope="col" class="text-center py-4">Cálculo INCP</th>
                 </tr>
                 </thead>

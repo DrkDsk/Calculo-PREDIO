@@ -16,7 +16,7 @@ const emitFunction = () => {
 </script>
 
 <template>
-    <button v-on:click="emitFunction" class="text-white px-8 py-1 md:px-5 md:py-2 bg-red-500 rounded-3xl">
+    <button v-on:click="emitFunction" class="text-white px-8 py-1 md:px-5 md:py-2 bg-red-500 rounded-md">
         {{title}}
     </button>
 </template>

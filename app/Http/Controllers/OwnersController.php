@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOwnerRequest;
-use App\Http\Requests\EditOwnerRequest;
 use App\Models\Propietario;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -60,7 +59,7 @@ class OwnersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditOwnerRequest $request, Propietario $propietario): RedirectResponse
+    public function update(CreateOwnerRequest $request, Propietario $propietario): RedirectResponse
     {
         $propietario->update($request->validated());
         return redirect()->route('propietarios.index');
@@ -73,7 +72,7 @@ class OwnersController extends Controller
     {
         try {
             $propietario->delete();
-            
+
             return true;
         } catch (\Exception $exception) {
             return false;

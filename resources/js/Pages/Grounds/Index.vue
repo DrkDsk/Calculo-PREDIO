@@ -22,6 +22,7 @@ const props = defineProps({
                         <th scope="col" class="text-center py-4">Tipo</th>
                         <th scope="col" class="text-center py-4">Propietario</th>
                         <th scope="col" class="text-center py-4">Cálculo INCP</th>
+                        <th scope="col" class="text-center py-4">Opciones</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y-8 divide-gray-100 border-gray-100">
@@ -77,6 +78,15 @@ const props = defineProps({
                             <div class="text-sm py-2 px-4 text-center">
                                 <div class="font-medium flex flex-row justify-center gap-3">
                                     <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
+                                    </LinkButtonInfo3xl>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="text-sm py-2 px-4 text-center">
+                                <div class="font-medium flex flex-row justify-center">
+                                    <LinkButtonInfo3xl :route-name="route('terrenos.edit', ground.id)" title="Editar">
                                     </LinkButtonInfo3xl>
                                 </div>
                             </div>
