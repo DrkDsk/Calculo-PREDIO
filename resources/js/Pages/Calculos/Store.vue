@@ -39,23 +39,15 @@ if (props.updateView) {
 }
 
 const formCalculation = useForm({
+    year: 0,
     inpcActual: props.balance?.INCP_at_operation_date ?? 0,
     inpcDePago: props.balance?.INCP_applied ?? 0,
     importe: props.balance?.amount ?? 0,
     tasaDeRecargo: props.balance?.surcharge_rate ?? 0
 })
 
-const tasaDeRecargo = computed(() => {
-    const yearsInTasaRecargo = props.years
-    const tasaRecargoSelected = yearsInTasaRecargo.find(year => {
-        return year.year == anioSeleccionado.value
-    })
-
-    return tasaRecargoSelected ? tasaRecargoSelected.value : null
-})
-
 const recargo = computed(() => {
-    let tasaRecargo = tasaDeRecargo.value
+    let tasaRecargo = formCalculation.tasaDeRecargo
 
     if (!tasaRecargo) {
         return null;
@@ -130,7 +122,7 @@ const saveOperation = () => {
                 <form class="relative w-full mt-6 space-y-8">
                     <div class="relative">
                         <div v-if="updateView">
-                            <div class="flex flex-row gap-2 bg-red-400">
+                            <div class="flex flex-row gap-2">
                                 <select  v-model="mesSeleccionado"
                                          class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
                                     <option selected>{{balance.month_of_pay}}</option>
@@ -142,11 +134,9 @@ const saveOperation = () => {
                             <div class="flex flex-row gap-2">
                                 <div class="flex flex-col w-1/2">
                                     <label class="font-medium text-gray-600 bg-white">Año del cálculo</label>
-                                    <select v-model="anioSeleccionado" class="block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                        <option v-for="year of years">
-                                            {{year.year}}
-                                        </option>
-                                    </select>
+                                    <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.year" type="text"
+                                           class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                                           placeholder="Ingresa el año">
                                 </div>
                                 <div class="flex flex-col w-1/2">
                                     <label class="font-medium text-gray-600 bg-white">Mes del cálculo</label>
@@ -171,31 +161,31 @@ const saveOperation = () => {
                         </div>
                     </div>
                     <div class="relative">
-                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Actual
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Actual
                             ({{ mesActual }})</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcActual" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC">
                     </div>
                     <div class="relative">
-                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">INPC Correspondiente
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Correspondiente
                             ({{ inpcMesCorrespondiente }})</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcDePago" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC Correspondiente">
                     </div>
                     <div class="relative">
-                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Importe</label>
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Importe</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.importe" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa el importe">
                     </div>
                     <div class="relative">
-                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Tasa de
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Tasa de
                             Recargo</label>
-                        <label class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                            {{tasaDeRecargo}}
-                        </label>
+                        <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.tasaDeRecargo" type="text"
+                               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                               placeholder="Ingresa la tasa de recargo">
                     </div>
                 </form>
             </div>

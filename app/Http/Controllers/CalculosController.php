@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveBalanceRequest;
 use App\Models\Balance;
-use App\Models\FederalSurcharge;
 use App\Models\Terreno;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -19,8 +18,7 @@ class CalculosController extends Controller
     public function create(Terreno $terreno): Response
     {
         return Inertia::render('Calculos/Create', [
-            'ground' => $terreno,
-            'years'  => FederalSurcharge::all()
+            'ground' => $terreno
         ]);
     }
 

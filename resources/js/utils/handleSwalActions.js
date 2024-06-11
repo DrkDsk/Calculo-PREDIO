@@ -32,6 +32,7 @@ const deleteAction = (route_name, id) => {
 
 const alertAction = (title, text, icon = 'success', showCancelButton = null, confirmButtonColor = null, cancelButtonColor = null, confirmButtonText = null) => {
     return Swal.fire({
+        cancelButtonText: 'Cancelar',
         title,
         text,
         icon,
