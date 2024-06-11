@@ -19,6 +19,8 @@ return new class extends Migration
             $table->double('amount');
             $table->double('updated_charge');
             $table->double('surcharge');
+            $table->timestamps('year_at_operation_date');
+            $table->double('due_payment_year');
             $table->double('amount_to_pay');
             $table->string('month_at_operation_date');
             $table->string('month_of_pay');

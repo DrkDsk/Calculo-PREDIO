@@ -30,7 +30,6 @@ const meses = [
 
 const mesActual = meses[(new Date()).getMonth()];
 let mesSeleccionado = ref('');
-let anioSeleccionado = ref('');
 let inpcMesCorrespondiente = ref('')
 
 if (props.updateView) {
@@ -39,8 +38,11 @@ if (props.updateView) {
 }
 
 const formCalculation = useForm({
-    year: 0,
+    current_year: props.balance?.year_at_operation_date ?? 0,
+    due_payment_year: props.balance?.due_payment_year ?? 0,
     inpcActual: props.balance?.INCP_at_operation_date ?? 0,
+    current_month: props.balance?.month_at_operation_date ?? 0,
+    month_of_pay: props.balance?.month_of_pay ?? 0,
     inpcDePago: props.balance?.INCP_applied ?? 0,
     importe: props.balance?.amount ?? 0,
     tasaDeRecargo: props.balance?.surcharge_rate ?? 0
@@ -92,10 +94,6 @@ const round = (number) => {
     return Math.floor(number);
 }
 
-const updateMesInpcCorrespondiente = () => {
-    inpcMesCorrespondiente.value = meses[ mesSeleccionado.value - 1]
-}
-
 const saveOperation = () => {
     let data = {
         'ground_id': props.ground.id,
@@ -116,10 +114,10 @@ const saveOperation = () => {
 
 <template>
     <div class="flex flex-col items-start justify-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
-        <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
+        <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-8/12">
             <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
-                <h4 class="w-full text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
-                <form class="relative w-full mt-6 space-y-8">
+                <h4 class="text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
+                <form class="relative mt-6 space-y-8 w-full">
                     <div class="relative">
                         <div v-if="updateView">
                             <div class="flex flex-row gap-2">
@@ -128,48 +126,74 @@ const saveOperation = () => {
                                     <option selected>{{balance.month_of_pay}}</option>
                                 </select>
                             </div>
-
                         </div>
-                        <div v-else>
-                            <div class="flex flex-row gap-2">
-                                <div class="flex flex-col w-1/2">
-                                    <label class="font-medium text-gray-600 bg-white">Año del cálculo</label>
-                                    <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.year" type="text"
-                                           class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                                           placeholder="Ingresa el año">
-                                </div>
-                                <div class="flex flex-col w-1/2">
-                                    <label class="font-medium text-gray-600 bg-white">Mes del cálculo</label>
-                                    <select v-on:change="updateMesInpcCorrespondiente" v-model="mesSeleccionado"
-                                            class="block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                        <option selected>Selecciona el mes del cálculo</option>
-                                        <option value="1">Enero</option>
-                                        <option value="2">Febrero</option>
-                                        <option value="3">Marzo</option>
-                                        <option value="4">Abril</option>
-                                        <option value="5">Mayo</option>
-                                        <option value="6">Junio</option>
-                                        <option value="7">Julio</option>
-                                        <option value="8">Agosto</option>
-                                        <option value="9">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                    </select>
-                                </div>
+                        <div v-else class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-gray-600 bg-white">Año del cálculo</label>
+                                <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.current_year" type="text"
+                                       class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                                       placeholder="Ingresa el año">
                             </div>
+
+                            <div>
+                                <label class="font-medium text-gray-600 bg-white">Año en que se debió pagar</label>
+                                <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.due_payment_year" type="text"
+                                       class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                                       placeholder="Ingresa el año">
+                            </div>
+
+                            <div>
+                                <label class="font-medium text-gray-600 bg-white">Mes del cálculo</label>
+                                <select v-model="formCalculation.current_month"
+                                        class="w-full block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                    <option selected>Selecciona el mes del cálculo</option>
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="font-medium text-gray-600 bg-white">Mes que se debió pagar</label>
+                                <select v-model="formCalculation.month_of_pay"
+                                        class="w-full block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                    <option selected>Selecciona el mes en que se debió pagar</option>
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                            </div>
+
                         </div>
                     </div>
                     <div class="relative">
                         <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Actual
-                            ({{ mesActual }})</label>
+                            (Mes anterior al actual)</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcActual" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC">
                     </div>
                     <div class="relative">
                         <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Correspondiente
-                            ({{ inpcMesCorrespondiente }})</label>
+                            (Mes que se debió pagar)</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcDePago" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC Correspondiente">
