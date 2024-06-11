@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateOwnerRequest extends FormRequest
@@ -17,14 +18,14 @@ class CreateOwnerRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'name'      => ['required'],
             'last_name' => ['required'],
-            'RFC' => ['required', 'min:12', 'max:14'],
+            'RFC' => ['nullable', 'min:12', 'max:14'],
             'telephone' => ['nullable', 'min:10', 'max:10']
         ];
     }
