@@ -1,7 +1,7 @@
 <script setup>
 
 import {router, useForm} from "@inertiajs/vue3";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 
 const props = defineProps({
     ground: Object,
@@ -12,30 +12,6 @@ const props = defineProps({
     routeName: String,
     years: Object
 })
-
-const meses = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre"
-]
-
-const mesActual = meses[(new Date()).getMonth()];
-let mesSeleccionado = ref('');
-let inpcMesCorrespondiente = ref('')
-
-if (props.updateView) {
-    mesSeleccionado.value = props.balance.month_of_pay
-    inpcMesCorrespondiente.value = mesSeleccionado.value
-}
 
 const formCalculation = useForm({
     year_at_operation_date: props.balance?.year_at_operation_date ?? 0,
@@ -103,8 +79,8 @@ const saveOperation = () => {
         'year_at_operation_date' : formCalculation.year_at_operation_date,
         'due_payment_year' : formCalculation.due_payment_year,
         'amount_to_pay': importarTotal.value,
-        'month_at_operation_date': mesActual,
-        'month_of_pay': inpcMesCorrespondiente.value,
+        'month_at_operation_date': formCalculation.current_month,
+        'month_of_pay': formCalculation.month_of_pay,
         'INCP_at_operation_date': formCalculation.inpcActual,
         'INCP_applied': formCalculation.inpcDePago,
         'surcharge_rate': formCalculation.tasaDeRecargo,
@@ -112,7 +88,7 @@ const saveOperation = () => {
 
     console.log(data)
 
-    //router.post(route(props.routeName, props.id), data)
+    router.post(route(props.routeName, props.id), data)
 }
 </script>
 
@@ -125,7 +101,7 @@ const saveOperation = () => {
                     <div class="relative">
                         <div v-if="updateView">
                             <div class="flex flex-row gap-2">
-                                <select  v-model="mesSeleccionado"
+                                <select v-model="mesSeleccionado"
                                          class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
                                     <option selected>{{balance.month_of_pay}}</option>
                                 </select>

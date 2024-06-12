@@ -27,6 +27,8 @@ class SaveBalanceRequest extends FormRequest
             'amount'                  => ['required'],
             'updated_charge'          => ['required'],
             'surcharge'               => ['required'],
+            'year_at_operation_date'  => ['required'],
+            'due_payment_year'        => ['required'],
             'amount_to_pay'           => ['required'],
             'month_at_operation_date' => ['required'],
             'month_of_pay'            => ['required'],

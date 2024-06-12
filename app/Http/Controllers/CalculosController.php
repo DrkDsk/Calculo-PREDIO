@@ -27,7 +27,29 @@ class CalculosController extends Controller
      */
     public function store(SaveBalanceRequest $request): RedirectResponse
     {
-        Balance::create($request->validated());
+        $months = [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ];
+
+        $matchedData = [
+            'month_of_operation_date' => $months[$request->get('month_at_operation_date') -1],
+            'month_of_pay' => $months[$request->get('month_of_pay')-1],
+        ];
+
+        $matchedData = array_merge($request->validated(), $matchedData);
+        Balance::create($matchedData);
+
         return redirect()->route('balances.index');
     }
 }
