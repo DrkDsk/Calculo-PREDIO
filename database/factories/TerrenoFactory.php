@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Terreno;
+use App\Models\Ground;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Terreno>
+ * @extends Factory<Ground>
  */
 class TerrenoFactory extends Factory
 {

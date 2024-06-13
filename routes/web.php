@@ -24,9 +24,9 @@ use App\Http\Controllers\SurchargeController;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('owners', OwnersController::class);
-Route::resource('terrenos', GroundsController::class)->only(['index','edit','update']);
-Route::resource('owners.terrenos', OwnerGroundsController::class)->only(['index', 'store', 'create']);
-Route::resource('terrenos.calculos', CalculosController::class)->only(['index', 'create', 'store']);
+Route::resource('grounds', GroundsController::class)->only(['index','edit','update']);
+Route::resource('owners.grounds', OwnerGroundsController::class)->only(['index', 'store', 'create']);
+Route::resource('grounds.calculos', CalculosController::class)->only(['index', 'create', 'store']);
 Route::resource('balances', BalancesController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('surcharge', SurchargeController::class)->only(['index', 'create', 'store']);
 

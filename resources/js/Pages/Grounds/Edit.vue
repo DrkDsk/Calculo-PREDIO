@@ -10,6 +10,8 @@ const props = defineProps({
     types: Object
 })
 
+console.log(props.owner)
+
 const formGround = useForm({
     _method: 'put',
     direction : props.ground.direction,
@@ -19,7 +21,7 @@ const formGround = useForm({
     years: props.ground.years,
 })
 const updateGround = () => {
-    formGround.post(route('terrenos.update', props.ground.id),{})
+    formGround.post(route('grounds.update', props.ground.id),{})
 }
 
 </script>

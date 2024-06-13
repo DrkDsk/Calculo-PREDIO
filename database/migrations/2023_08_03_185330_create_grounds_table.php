@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('direction');
             $table->string('grant_number')->nullable();
             $table->double('square_meter');
-            $table->enum('type', \App\Models\Terreno::TypesAllowed);
+            $table->enum('type', \App\Models\Ground::TypesAllowed);
             $table->timestamps();
         });
     }

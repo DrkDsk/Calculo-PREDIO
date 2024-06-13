@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use App\Models\Owner;
-use App\Models\Terreno;
+use App\Models\Ground;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard', [
             'owners'       => Owner::paginate(10),
-            'groundsCount' => Terreno::count(),
+            'groundsCount' => Ground::count(),
             'fullBalance'  => Balance::sum('amount_to_pay')
         ]);
     }

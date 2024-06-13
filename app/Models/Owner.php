@@ -14,6 +14,6 @@ class Owner extends Model
 
     public function grounds(): HasMany
     {
-        return $this->hasMany(Terreno::class, 'owner_id')->with('owner');
+        return $this->hasMany(Ground::class, 'owner_id')->with('owner');
     }
 }

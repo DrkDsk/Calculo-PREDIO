@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGroundRequest;
-use App\Models\Terreno;
+use App\Models\Ground;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -12,22 +12,22 @@ class GroundsController extends Controller
     public function index(): Response
     {
         return Inertia::render('Grounds/Index', [
-            'grounds' => Terreno::with('owner')->paginate(10)
+            'grounds' => Ground::with('owner')->paginate(10)
         ]);
     }
 
-    public function edit(Terreno $terreno): Response
+    public function edit(Ground $ground): Response
     {
         return Inertia::render('Grounds/Edit', [
-            'types' => Terreno::TypesAllowed,
-            'ground' => $terreno,
-            'owner' => $terreno->owner
+            'types' => Ground::TypesAllowed,
+            'ground' => $ground,
+            'owner' => $ground->owner
         ]);
     }
 
-    public function update(CreateGroundRequest $request, Terreno $terreno)
+    public function update(CreateGroundRequest $request, Ground $ground)
     {
-        $terreno->update($request->validated());
-        return redirect()->route('terrenos.index');
+        $ground->update($request->validated());
+        return redirect()->route('grounds.index');
     }
 }
