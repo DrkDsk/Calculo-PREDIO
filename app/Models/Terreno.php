@@ -16,6 +16,6 @@ class Terreno extends Model
 
     public function owner() : BelongsTo
     {
-        return $this->belongsTo(Propietario::class, 'owner_id');
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
 }

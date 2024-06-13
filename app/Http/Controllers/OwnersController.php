@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOwnerRequest;
-use App\Models\Propietario;
+use App\Models\Owner;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +15,7 @@ class OwnersController extends Controller
      */
     public function index(): Response
     {
-        $owners = Propietario::paginate(10);
+        $owners = Owner::paginate(10);
         return Inertia::render('Owners/Index', [
             'owners' => $owners
         ]);
@@ -34,8 +34,8 @@ class OwnersController extends Controller
      */
     public function store(CreateOwnerRequest $request): RedirectResponse
     {
-        Propietario::create($request->validated());
-        return redirect()->route('propietarios.index');
+        Owner::create($request->validated());
+        return redirect()->route('owners.index');
     }
 
     /**
@@ -49,29 +49,29 @@ class OwnersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Propietario $propietario): Response
+    public function edit(Owner $owner): Response
     {
         return Inertia::render('Owners/Edit', [
-            'owner' => $propietario
+            'owner' => $owner
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateOwnerRequest $request, Propietario $propietario): RedirectResponse
+    public function update(CreateOwnerRequest $request, Owner $owner): RedirectResponse
     {
-        $propietario->update($request->validated());
-        return redirect()->route('propietarios.index');
+        $owner->update($request->validated());
+        return redirect()->route('owners.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Propietario $propietario): bool
+    public function destroy(Owner $owner): bool
     {
         try {
-            $propietario->delete();
+            $owner->delete();
 
             return true;
         } catch (\Exception $exception) {

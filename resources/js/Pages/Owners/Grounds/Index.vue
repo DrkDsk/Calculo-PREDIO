@@ -17,7 +17,7 @@ console.log(props.grounds)
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <LinkButtonSuccess4xl :route-name="route('propietarios.terrenos.create', owner.id)" title="Registrar propiedad">
+                <LinkButtonSuccess4xl :route-name="route('owners.terrenos.create', owner.id)" title="Registrar propiedad">
                 </LinkButtonSuccess4xl>
             </div>
             <div v-if="grounds.data.length" class="w-11/12 flex flex-col">

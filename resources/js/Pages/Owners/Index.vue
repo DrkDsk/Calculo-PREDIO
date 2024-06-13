@@ -22,7 +22,7 @@ const handleDeleteOwner = (owner_id) => {
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="my-4 flex flex-row md:justify-end w-full mr-8">
-                <LinkSuccess4xl :route-name="route('propietarios.create')" title="Registrar Propietario"></LinkSuccess4xl>
+                <LinkSuccess4xl :route-name="route('owners.create')" title="Registrar Propietario"></LinkSuccess4xl>
             </div>
             <div v-if="owners.data.length" class="w-11/12 flex flex-col">
                 <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
@@ -85,7 +85,7 @@ const handleDeleteOwner = (owner_id) => {
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
                                 <div class="font-medium flex flex-col gap-3">
-                                    <LinkSuccess class="text-green-500" :route-name="route('propietarios.terrenos.index', owner.id)" title="Ver terrenos">
+                                    <LinkSuccess class="text-green-500" :route-name="route('owners.terrenos.index', owner.id)" title="Ver terrenos">
                                     </LinkSuccess>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ const handleDeleteOwner = (owner_id) => {
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
                                 <div class="font-medium gap-3 flex flex-row justify-center">
-                                    <LinkButtonInfo3xl :route-name="route('propietarios.edit', owner.id)" title="Editar">
+                                    <LinkButtonInfo3xl :route-name="route('owners.edit', owner.id)" title="Editar">
                                     </LinkButtonInfo3xl>
 
                                     <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
