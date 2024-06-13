@@ -9,15 +9,13 @@ const props = defineProps({
     owner   : Object
 })
 
-console.log(props.grounds)
-
 </script>
 
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
             <div class="flex flex-row justify-end my-4 w-full mr-8">
-                <LinkButtonSuccess4xl :route-name="route('propietarios.terrenos.create', owner.id)" title="Registrar propiedad">
+                <LinkButtonSuccess4xl :route-name="route('owners.grounds.create', owner.id)" title="Registrar propiedad">
                 </LinkButtonSuccess4xl>
             </div>
             <div v-if="grounds.data.length" class="w-11/12 flex flex-col">
@@ -85,7 +83,7 @@ console.log(props.grounds)
                         <td>
                             <div class="text-sm py-2 px-4 text-center items-center mx-auto flex flex-row justify-center">
                                 <div class="font-medium gap-3 flex flex-row justify-center w-full">
-                                    <LinkButtonInfo3xl :route-name="route('terrenos.calculos.create', ground.id)" title="Realizar cálculo">
+                                    <LinkButtonInfo3xl :route-name="route('grounds.balances.create', ground.id)" title="Realizar cálculo">
                                     </LinkButtonInfo3xl>
                                 </div>
                             </div>

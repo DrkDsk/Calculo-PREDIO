@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Balance;
-use App\Models\Propietario;
-use App\Models\Terreno;
+use App\Models\Owner;
+use App\Models\Ground;
 use Illuminate\Database\Seeder;
 
 class OwnerSeeder extends Seeder
@@ -14,20 +14,19 @@ class OwnerSeeder extends Seeder
      */
     public function run(): void
     {
-        Propietario::factory()
+        Owner::factory()
             ->count(30)
             ->create()
-            ->each(function (Propietario $propietario) {
-                Terreno::factory()
+            ->each(function (Owner $owner) {
+                Ground::factory()
                     ->count(30)
-                    ->create(['owner_id' => $propietario->id])
-                    ->each(function (Terreno $terreno) {
+                    ->create(['owner_id' => $owner->id])
+                    ->each(function (Ground $ground) {
                         Balance::factory()
                             ->count(1)
-                            ->create(['ground_id' => $terreno->id]);
+                            ->create(['ground_id' => $ground->id]);
                     })
                 ;
             });
-
     }
 }

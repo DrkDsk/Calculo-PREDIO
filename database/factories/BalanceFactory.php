@@ -20,16 +20,16 @@ class BalanceFactory extends Factory
         $yearOperationDate = $this->faker->numberBetween(2000, 2025);
 
         return [
-            'amount' => $this->faker->randomFloat(2, 10),
-            'updated_charge' => $this->faker->randomFloat(2, 10),
-            'surcharge' => $this->faker->randomFloat(2, 10),
+            'amount' => $this->faker->randomFloat(2, 10, 1000),
+            'updated_charge' => $this->faker->randomFloat(2, 10, 1000),
+            'surcharge' => $this->faker->randomFloat(2, 10, 1000),
             'year_at_operation_date' => $yearOperationDate,
             'due_payment_year' => $yearOperationDate -1,
-            'amount_to_pay' => $this->faker->randomFloat(2, 10),
+            'amount_to_pay' => $this->faker->randomFloat(2, 10, 5000),
             'month_at_operation_date' => $this->faker->date("F"),
             'month_of_pay' => $this->faker->date("F"),
-            'INCP_at_operation_date' => $this->faker->randomFloat(2, 10),
-            'INCP_applied' => $this->faker->randomFloat(2, 10),
+            'INCP_at_operation_date' => $this->faker->randomFloat(2, 1000),
+            'INCP_applied' => $this->faker->randomFloat(2, 1000),
             'surcharge_rate' => $this->faker->randomFloat(2, 10),
         ];
     }

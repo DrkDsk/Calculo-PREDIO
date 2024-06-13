@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\GroundBalanceController;
 use App\Http\Controllers\OwnersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OwnerGroundsController;
@@ -23,10 +23,10 @@ use App\Http\Controllers\SurchargeController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('propietarios', OwnersController::class);
-Route::resource('terrenos', GroundsController::class)->only(['index','edit','update']);
-Route::resource('propietarios.terrenos', OwnerGroundsController::class)->only(['index', 'store', 'create']);
-Route::resource('terrenos.calculos', CalculosController::class)->only(['index', 'create', 'store']);
+Route::resource('owners', OwnersController::class);
+Route::resource('grounds', GroundsController::class)->only(['index','edit','update']);
+Route::resource('owners.grounds', OwnerGroundsController::class)->only(['index', 'store', 'create']);
+Route::resource('grounds.balances', GroundBalanceController::class)->only(['index', 'create', 'store']);
 Route::resource('balances', BalancesController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('surcharge', SurchargeController::class)->only(['index', 'create', 'store']);
 

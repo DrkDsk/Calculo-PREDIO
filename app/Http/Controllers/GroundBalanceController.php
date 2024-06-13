@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveBalanceRequest;
 use App\Models\Balance;
-use App\Models\Terreno;
+use App\Models\Ground;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CalculosController extends Controller
+class GroundBalanceController extends Controller
 {
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Terreno $terreno): Response
+    public function create(Ground $ground): Response
     {
         $assetExcel = asset('storage/excel/CALCULO ZOFEMAT 2024.xlsx');
 
         return Inertia::render('Calculos/Create', [
-            'ground' => $terreno,
+            'ground' => $ground,
             'excelUrl' => $assetExcel
         ]);
     }

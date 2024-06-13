@@ -16,7 +16,7 @@ const formGround = useForm({
     years: ''
 })
 const saveGround = () => {
-    formGround.post(route('propietarios.terrenos.store', props.owner.id),{})
+    formGround.post(route('owners.grounds.store', props.owner.id),{})
 }
 
 </script>

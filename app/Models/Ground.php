@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Terreno extends Model
+class Ground extends Model
 {
     use HasFactory;
     protected $table = 'grounds';
@@ -16,6 +16,6 @@ class Terreno extends Model
 
     public function owner() : BelongsTo
     {
-        return $this->belongsTo(Propietario::class, 'owner_id');
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
 }

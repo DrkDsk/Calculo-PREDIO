@@ -40,7 +40,7 @@ const deleteOwner = (owner_id) => {
     ).then((result) => {
         if (result.isConfirmed) {
             try {
-                deleteAction('propietarios.destroy', owner_id)
+                deleteAction('owners.destroy', owner_id)
             } catch (e) {
                 alertAction(
                     'Oops...',

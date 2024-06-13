@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Propietario;
+use App\Models\Owner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Propietario>
+ * @extends Factory<Owner>
  */
-class PropietarioFactory extends Factory
+class OwnerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,8 +20,8 @@ class PropietarioFactory extends Factory
         return [
             'name' => $this->faker->name,
             'last_name' => $this->faker->lastName,
-            'telephone' => $this->faker->phoneNumber,
-            'RFC' => "5688898989"
+            'telephone' => $this->faker->numerify('##########'),
+            'RFC' => $this->faker->numerify('##############')
         ];
     }
 }

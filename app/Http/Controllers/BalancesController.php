@@ -19,7 +19,7 @@ class BalancesController extends Controller
 
     public function show(Balance $balance): Response
     {
-        return Inertia::render('Calculos/Edit',[
+        return Inertia::render('Calculos/Show',[
             'ground' => $balance->ground,
             'balance' => $balance
         ]);

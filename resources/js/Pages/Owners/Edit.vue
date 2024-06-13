@@ -16,7 +16,7 @@ const formOwner = useForm({
 })
 
 const updateOwner = () => {
-    formOwner.post(route('propietarios.update', props.owner.id))
+    formOwner.post(route('owners.update', props.owner.id))
 }
 
 </script>

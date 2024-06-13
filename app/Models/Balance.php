@@ -26,6 +26,6 @@ class Balance extends Model
 
     public function ground() : BelongsTo
     {
-        return $this->belongsTo(Terreno::class, 'ground_id')->with('owner');
+        return $this->belongsTo(Ground::class, 'ground_id')->with('owner');
     }
 }

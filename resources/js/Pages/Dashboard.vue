@@ -18,7 +18,7 @@ const formOwner = useForm({
 })
 
 const saveOwner = () => {
-    formOwner.post(route('propietarios.store'),{})
+    formOwner.post(route('owners.store'),{})
 }
 
 </script>
