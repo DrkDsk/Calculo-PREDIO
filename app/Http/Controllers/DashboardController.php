@@ -15,7 +15,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', [
             'owners'       => Owner::paginate(10),
             'groundsCount' => Ground::count(),
-            'fullBalance'  => Balance::sum('amount_to_pay')
+            'fullBalance'  => round(Balance::sum('amount_to_pay'),2)
         ]);
     }
 }
