@@ -28,7 +28,7 @@ const recargo = computed(() => {
     let tasaRecargo = formCalculation.tasaDeRecargo
 
     if (!tasaRecargo) {
-        return null;
+        return 0;
     }
 
     return round(actualizacionPlusImporte() * tasaRecargo)
@@ -54,7 +54,7 @@ const importarTotal = computed(() => {
     let importe = round(formCalculation.importe)
 
     if (!importe || !actualizacion.value || !recargo.value) {
-        return null;
+        return 0;
     }
 
     return round(importe + actualizacion.value + recargo.value)
@@ -86,25 +86,49 @@ const saveOperation = () => {
         'surcharge_rate': formCalculation.tasaDeRecargo,
     }
 
-    console.log(data)
-
     router.post(route(props.routeName, props.id), data)
 }
 </script>
 
 <template>
-    <div class="flex flex-col items-start justify-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
-        <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-8/12">
+    <div class="flex flex-col items-start justify-center w-full lg:flex-row">
+        <div class="relative z-10 w-full">
             <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                 <h4 class="text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
                 <form class="relative mt-6 space-y-8 w-full">
                     <div class="relative">
                         <div v-if="updateView">
-                            <div class="flex flex-row gap-2">
-                                <select v-model="mesSeleccionado"
-                                         class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                    <option selected>{{balance.month_of_pay}}</option>
-                                </select>
+                            <div class="grid grid-cols-2 gap-3 space-y-3">
+                                <div>
+                                    <label class="absolute px-2 ml-2 -mt-3 bg-gray-100 rounded-md font-medium text-gray-600">
+                                        Año del cálculo
+                                    </label>
+                                    <input disabled v-model="formCalculation.year_at_operation_date" type="text"
+                                           class="bg-gray-100 block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                </div>
+
+                                <div>
+                                    <label class="absolute px-2 ml-2 -mt-3 bg-gray-100 rounded-md font-medium text-gray-600">
+                                        Año en que se debió pagar
+                                    </label>
+                                    <input disabled v-model="formCalculation.due_payment_year" type="text"
+                                           class="bg-gray-100 block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                </div>
+
+                                <div>
+                                    <label class="absolute px-2 ml-2 -mt-3 bg-gray-100 rounded-md font-medium text-gray-600">
+                                        Mes del cálculo
+                                    </label>
+                                    <input disabled v-model="formCalculation.current_month" type="text"
+                                           class="bg-gray-100 block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                </div>
+                                <div>
+                                    <label class="absolute px-2 ml-2 -mt-3 bg-gray-100 rounded-md font-medium text-gray-600">
+                                        Mes que se debió pagar
+                                    </label>
+                                    <input disabled v-model="formCalculation.month_of_pay" type="text"
+                                           class="bg-gray-100 block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black">
+                                </div>
                             </div>
                         </div>
                         <div v-else class="grid grid-cols-2 gap-3">
@@ -165,27 +189,27 @@ const saveOperation = () => {
                         </div>
                     </div>
                     <div class="relative">
-                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Actual
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="rounded-md absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Actual
                             (Mes anterior al actual)</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcActual" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC">
                     </div>
                     <div class="relative">
-                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Correspondiente
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="rounded-md absolute px-2 ml-2 -mt-3 font-medium text-gray-600">INPC Correspondiente
                             (Mes que se debió pagar)</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.inpcDePago" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa la cantidad del INPC Correspondiente">
                     </div>
                     <div class="relative">
-                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Importe</label>
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="rounded-md absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Importe</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.importe" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                                placeholder="Ingresa el importe">
                     </div>
                     <div class="relative">
-                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Tasa de
+                        <label :class="updateView ? 'bg-gray-100' : 'bg-white'" class="rounded-md absolute px-2 ml-2 -mt-3 font-medium text-gray-600">Tasa de
                             Recargo</label>
                         <input :disabled="updateView" :class="updateView ? 'bg-gray-100' : 'bg-white'" v-model="formCalculation.tasaDeRecargo" type="text"
                                class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-black"
@@ -197,14 +221,14 @@ const saveOperation = () => {
         <div class="ml-8 z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
             <h4 class="w-full text-4xl font-medium leading-snug">Resultados:</h4>
             <h3 class="w-full text-xl font-medium leading-snug">Importe: <span
-                class="text-yellow-600">{{ round(formCalculation.importe) }}</span></h3>
+                class="text-yellow-600">${{round(formCalculation.importe)}}</span></h3>
             <h3 class="w-full text-xl font-medium leading-snug">Actualización: <span
-                class="text-blue-600">{{ actualizacion }}</span></h3>
-            <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">{{ recargo }}</span>
+                class="text-blue-600">${{actualizacion}}</span></h3>
+            <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">${{recargo}}</span>
             </h3>
             <div class="linea-divisoria">
                 <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span
-                    class="text-green-600">{{ importarTotal }}</span></h3>
+                    class="text-green-600">${{importarTotal}}</span></h3>
             </div>
             <div v-if="importarTotal && titleButton" class="flex flex-row justify-end w-full mt-4">
                 <button v-on:click="saveOperation" class="text-white w-full rounded-full bg-emerald-600 px-3 py-2">

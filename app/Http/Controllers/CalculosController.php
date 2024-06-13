@@ -17,8 +17,11 @@ class CalculosController extends Controller
      */
     public function create(Terreno $terreno): Response
     {
+        $assetExcel = asset('storage/excel/CALCULO ZOFEMAT 2024.xlsx');
+
         return Inertia::render('Calculos/Create', [
-            'ground' => $terreno
+            'ground' => $terreno,
+            'excelUrl' => $assetExcel
         ]);
     }
 
@@ -43,8 +46,8 @@ class CalculosController extends Controller
         ];
 
         $matchedData = [
-            'month_of_operation_date' => $months[$request->get('month_at_operation_date') -1],
-            'month_of_pay' => $months[$request->get('month_of_pay')-1],
+            'month_at_operation_date' => $months[$request->get('month_at_operation_date') -1],
+            'month_of_pay' => $months[$request->get('month_of_pay') -1],
         ];
 
         $matchedData = array_merge($request->validated(), $matchedData);
