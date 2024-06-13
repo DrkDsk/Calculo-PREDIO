@@ -17,8 +17,11 @@ class CalculosController extends Controller
      */
     public function create(Terreno $terreno): Response
     {
+        $assetExcel = asset('storage/excel/CALCULO ZOFEMAT 2024.xlsx');
+
         return Inertia::render('Calculos/Create', [
-            'ground' => $terreno
+            'ground' => $terreno,
+            'excelUrl' => $assetExcel
         ]);
     }
 

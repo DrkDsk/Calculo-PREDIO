@@ -86,15 +86,13 @@ const saveOperation = () => {
         'surcharge_rate': formCalculation.tasaDeRecargo,
     }
 
-    console.log(data)
-
     router.post(route(props.routeName, props.id), data)
 }
 </script>
 
 <template>
-    <div class="flex flex-col items-start justify-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
-        <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-8/12">
+    <div class="flex flex-col items-start justify-center w-full lg:flex-row">
+        <div class="relative z-10 w-full max-w-2xl lg:w-8/12">
             <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                 <h4 class="text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
                 <form class="relative mt-6 space-y-8 w-full">
