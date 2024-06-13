@@ -21,7 +21,7 @@ const round = (number) => {
 
 <template>
     <Navbar>
-        <div class="w-10/12 mx-auto mt-10">
+        <div class="w-11/12 mx-auto mt-10">
             <div class="flex flex-col items-start justify-center w-full lg:flex-row">
                 <div class="relative z-10 w-full">
                     <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
