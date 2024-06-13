@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CalculosController extends Controller
+class GroundBalanceController extends Controller
 {
 
     /**

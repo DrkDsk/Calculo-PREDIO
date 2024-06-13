@@ -20,8 +20,8 @@ class OwnerFactory extends Factory
         return [
             'name' => $this->faker->name,
             'last_name' => $this->faker->lastName,
-            'telephone' => $this->faker->phoneNumber,
-            'RFC' => "5688898989"
+            'telephone' => $this->faker->numerify('##########'),
+            'RFC' => $this->faker->numerify('##############')
         ];
     }
 }

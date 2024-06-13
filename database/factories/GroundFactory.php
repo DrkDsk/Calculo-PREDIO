@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<Ground>
  */
-class TerrenoFactory extends Factory
+class GroundFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +20,7 @@ class TerrenoFactory extends Factory
         return [
             'direction' => $this->faker->address,
             'grant_number' => $this->faker->word,
-            'square_meter' => $this->faker->randomFloat(2, 10),
+            'square_meter' => $this->faker->randomFloat(2, 100, 10500),
             'type' => "ORNATO"
         ];
     }

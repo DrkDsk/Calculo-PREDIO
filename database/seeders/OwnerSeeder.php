@@ -17,17 +17,16 @@ class OwnerSeeder extends Seeder
         Owner::factory()
             ->count(30)
             ->create()
-            ->each(function (Owner $propietario) {
+            ->each(function (Owner $owner) {
                 Ground::factory()
                     ->count(30)
-                    ->create(['owner_id' => $propietario->id])
-                    ->each(function (Ground $terreno) {
+                    ->create(['owner_id' => $owner->id])
+                    ->each(function (Ground $ground) {
                         Balance::factory()
                             ->count(1)
-                            ->create(['ground_id' => $terreno->id]);
+                            ->create(['ground_id' => $ground->id]);
                     })
                 ;
             });
-
     }
 }

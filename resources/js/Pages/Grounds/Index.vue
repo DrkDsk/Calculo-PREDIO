@@ -77,7 +77,7 @@ const props = defineProps({
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
                                 <div class="font-medium flex flex-row justify-center gap-3">
-                                    <LinkButtonInfo3xl :route-name="route('grounds.calculos.create', ground.id)" title="Realizar cálculo">
+                                    <LinkButtonInfo3xl :route-name="route('grounds.balances.create', ground.id)" title="Realizar cálculo">
                                     </LinkButtonInfo3xl>
                                 </div>
                             </div>
