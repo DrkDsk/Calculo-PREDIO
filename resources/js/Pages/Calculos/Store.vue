@@ -92,7 +92,7 @@ const saveOperation = () => {
 
 <template>
     <div class="flex flex-col items-start justify-center w-full lg:flex-row">
-        <div class="relative z-10 w-full max-w-2xl lg:w-8/12">
+        <div class="relative z-10 w-full">
             <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                 <h4 class="text-4xl font-medium leading-snug text-sky-700">Realizar cálculo</h4>
                 <form class="relative mt-6 space-y-8 w-full">
@@ -195,14 +195,14 @@ const saveOperation = () => {
         <div class="ml-8 z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
             <h4 class="w-full text-4xl font-medium leading-snug">Resultados:</h4>
             <h3 class="w-full text-xl font-medium leading-snug">Importe: <span
-                class="text-yellow-600">{{ round(formCalculation.importe) }}</span></h3>
+                class="text-yellow-600">${{round(formCalculation.importe)}}</span></h3>
             <h3 class="w-full text-xl font-medium leading-snug">Actualización: <span
-                class="text-blue-600">{{ actualizacion }}</span></h3>
-            <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">{{ recargo }}</span>
+                class="text-blue-600">${{actualizacion}}</span></h3>
+            <h3 class="w-full text-xl font-medium leading-snug">Recargo: <span class="text-red-600">${{recargo}}</span>
             </h3>
             <div class="linea-divisoria">
                 <h3 class="w-full text-xl font-medium leading-snug">Importe a Pagar: <span
-                    class="text-green-600">{{ importarTotal }}</span></h3>
+                    class="text-green-600">${{importarTotal}}</span></h3>
             </div>
             <div v-if="importarTotal && titleButton" class="flex flex-row justify-end w-full mt-4">
                 <button v-on:click="saveOperation" class="text-white w-full rounded-full bg-emerald-600 px-3 py-2">
