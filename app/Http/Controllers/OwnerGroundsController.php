@@ -15,7 +15,7 @@ class OwnerGroundsController extends Controller
     public function index(Propietario $propietario): Response
     {
         return Inertia::render('Owners/Grounds/Index',[
-            'grounds' => $propietario->grounds,
+            'grounds' => $propietario->grounds()->paginate(10),
             'owner'  => $propietario
         ]);
     }

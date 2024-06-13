@@ -11,8 +11,8 @@ const props = defineProps({
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
-            <div class="w-11/12 flex flex-col">
-                <table v-if="grounds.data.length" class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
+            <div v-if="grounds.data.length" class="w-11/12 flex flex-col">
+                <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                     <thead class="text-left uppercase">
                     <tr class="text-white">
                         <th scope="col" class="text-center py-4">No.</th>
@@ -94,11 +94,13 @@ const props = defineProps({
                     </tr>
                     </tbody>
                 </table>
-                <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
+                <pagination class="my-6 mx-auto" :links="grounds.links"></pagination>
+            </div>
+            <div v-else class="h-screen flex items-center justify-center">
+                <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">
                     <p>Sin registros de terrenos</p>
                 </div>
             </div>
-            <pagination class="mt-6" :links="grounds.links"></pagination>
         </div>
     </Navbar>
 </template>

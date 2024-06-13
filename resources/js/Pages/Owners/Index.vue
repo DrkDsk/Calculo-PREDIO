@@ -21,11 +21,11 @@ const handleDeleteOwner = (owner_id) => {
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
-            <div class="w-11/12 flex flex-col">
-                <div class="my-4 flex flex-row md:justify-end w-full mr-8">
-                    <LinkSuccess4xl :route-name="route('propietarios.create')" title="Registrar Propietario"></LinkSuccess4xl>
-                </div>
-                <table v-if="owners.data.length" class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
+            <div class="my-4 flex flex-row md:justify-end w-full mr-8">
+                <LinkSuccess4xl :route-name="route('propietarios.create')" title="Registrar Propietario"></LinkSuccess4xl>
+            </div>
+            <div v-if="owners.data.length" class="w-11/12 flex flex-col">
+                <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                     <thead class="text-left uppercase">
                     <tr class="text-white">
                         <th scope="col" class="text-center py-4">No.</th>
@@ -105,11 +105,13 @@ const handleDeleteOwner = (owner_id) => {
                     </tr>
                     </tbody>
                 </table>
-                <div v-else class="bg-cyan-800 p-6 rounded-3xl text-white">
+                <pagination class="my-6 mx-auto" :links="owners.links"></pagination>
+            </div>
+            <div v-else class="h-screen flex items-center justify-center">
+                <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">
                     <p>Sin registros de propietarios</p>
                 </div>
             </div>
-            <pagination class="my-6" :links="owners.links"></pagination>
         </div>
     </Navbar>
 
