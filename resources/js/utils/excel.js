@@ -22,8 +22,7 @@ const fetchExcel = async (sheetIndex,excelUrl) => {
         let jsonSheet = XLSX.utils.sheet_to_json(workSheet, { header: 1 });
         return jsonSheet.map(row => row.map(cell => roundNumber(cell)))
     } catch (error) {
-        console.log(error)
-        console.error("Error al cargar archivo")
+
     }
 }
 
