@@ -1,7 +1,7 @@
 <script setup>
 import Navbar from "@/Layouts/Navbar.vue";
 import LinkButtonSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
-import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
+import LinkButtonInfo3xl from "@/Components/LinkButton3xl.vue";
 import Pagination from "@/Layouts/Pagination.vue";
 
 const props = defineProps({

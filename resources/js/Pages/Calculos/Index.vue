@@ -3,7 +3,7 @@
 import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
 import {deleteCalculo} from '@/utils/handleDeleteService.js'
-import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
+import LinkButton3xl from "@/Components/LinkButton3xl.vue";
 import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
 
 const props = defineProps({
@@ -85,8 +85,8 @@ const handleDeleteCalculo = (balance_id) => {
                         <td>
                             <div class="text-sm py-2 px-4 text-center">
                                 <div class="font-medium gap-4 flex flex-row justify-center">
-                                    <LinkButtonInfo3xl :route-name="route('balances.show', balance.id)" title="Ver cálculo">
-                                    </LinkButtonInfo3xl>
+                                    <LinkButton3xl :route-name="route('balances.show', balance.id)" title="Ver cálculo">
+                                    </LinkButton3xl>
 
                                     <ButtonDelete3xl class="text-white px-3 py-2 bg-red-500 rounded-3xl" title="Eliminar cálculo" @delete="handleDeleteCalculo(balance.id)">
                                     </ButtonDelete3xl>

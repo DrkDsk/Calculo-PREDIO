@@ -18,8 +18,8 @@ class OwnersController extends Controller
     public function index(SearchRequest $request): Response
     {
         $search = $request->get('search', '');
-
         $results = Owner::query();
+
         if ($search) {
             $results->where('name', 'like', '%' . $search . '%')
                 ->orWhere('last_name', 'like', '%' . $search . '%')

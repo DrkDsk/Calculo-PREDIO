@@ -4,7 +4,7 @@ import Navbar from "@/Layouts/Navbar.vue";
 import Pagination from "@/Layouts/Pagination.vue";
 import LinkSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
 import LinkSuccess from "@/Components/LinkSuccess.vue";
-import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
+import LinkButton3xl from "@/Components/LinkButton3xl.vue";
 import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
 import {deleteOwner} from "@/utils/handleDeleteService.js";
 import SearchComponent from "@/Components/SearchComponent.vue";
@@ -13,47 +13,33 @@ import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
     owners : Object,
-    perPage : Number,
     search : String
 })
 
 const owners = ref([]);
-const links = ref({})
+const links = props.owners.meta
 const isSearching = ref(false)
 isSearching.value = props.search.length
-
-links.value = props.owners.meta;
 owners.value = props.owners.data.map((owner) => owner);
 
 const handleDeleteOwner = (owner_id) => {
     deleteOwner(owner_id)
 }
 
-const handleSearchClient = async (search) => {
+const handleSearchOwner = async (search) => {
     isSearching.value = search.length
+    let  params = {}
     if (search.length > 0) {
-
-        let params = {
-            search
-        };
-
-        router.get(route('owners.index'), params, {
-            preserveState : true,
-            onSuccess : (response) => {
-                const ownerProp = response.props.owners
-                owners.value = ownerProp.data.map((owner) => owner);
-            }
-        })
-    } else {
-        let  params = {}
-        router.get(route('owners.index'), params, {
-            preserveState : true,
-            onSuccess : (response) => {
-                const ownerProp = response.props.owners
-                owners.value = ownerProp.data.map((owner) => owner);
-            }
-        })
+        params.search = search
     }
+
+    router.get(route('owners.index'), params, {
+        preserveState : true,
+        onSuccess : (response) => {
+            const ownerProp = response.props.owners
+            owners.value = ownerProp.data.map((owner) => owner);
+        }
+    })
 }
 
 </script>
@@ -61,7 +47,7 @@ const handleSearchClient = async (search) => {
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
-            <SearchComponent :search-field="props.search" place-holder="Buscar propietario" @search="handleSearchClient"/>
+            <SearchComponent :search-field="props.search" place-holder="Buscar propietario" @search="handleSearchOwner"/>
             <div class="w-11/12 flex flex-col">
                 <div class="flex justify-end my-4">
                     <LinkSuccess4xl :route-name="route('owners.create')" title="Registrar Propietario"></LinkSuccess4xl>
@@ -136,8 +122,8 @@ const handleSearchClient = async (search) => {
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
                                     <div class="font-medium gap-3 flex flex-row justify-center">
-                                        <LinkButtonInfo3xl :route-name="route('owners.edit', owner.id)" title="Editar">
-                                        </LinkButtonInfo3xl>
+                                        <LinkButton3xl :route-name="route('owners.edit', owner.id)" title="Editar">
+                                        </LinkButton3xl>
 
                                         <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
                                         </ButtonDelete3xl>

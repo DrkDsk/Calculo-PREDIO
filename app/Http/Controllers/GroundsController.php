@@ -3,16 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGroundRequest;
+use App\Http\Requests\SearchRequest;
 use App\Models\Ground;
+use App\Http\Resources\GroundResource;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class GroundsController extends Controller
 {
-    public function index(): Response
+    public function index(SearchRequest $request): Response
     {
+        $search = $request->get('search', '');
+        $results = Ground::query();
+
+        if ($search) {
+            $results->where('direction', 'like', '%' . $search . '%')
+            ->orWhere('grant_number', 'like', '%' . $search . '%')
+            ->orWhere('square_meter', 'like', '%' . $search . '%')
+            ->orWhere('type', 'like', '%' . $search . '%');
+
+            return Inertia::render('Grounds/Index', [
+                'grounds' => GroundResource::collection(
+                    $results->with('owner')->get()
+                ),
+                'search' => $search,
+            ]);
+        }
+
         return Inertia::render('Grounds/Index', [
-            'grounds' => Ground::with('owner')->paginate(10)
+            'grounds' => GroundResource::collection(
+                $results->with('owner')->paginate(10)
+            ),
+            'search' => $search
         ]);
     }
 
