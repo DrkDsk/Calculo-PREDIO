@@ -25,11 +25,11 @@ const handleFetchExcel = async (sheetIndex) => {
 <template>
     <Navbar>
         <div class="w-10/12 mx-auto mt-10">
-            <Store :ground="ground" :years="years" route-name="grounds.balances.store" :id="ground.id" title-button="Guardar cálculo"></Store>
             <div class="mt-4 space-x-2">
                 <button v-if="sheetVisibleIndex !== 1" class="my-4 bg-green-400 px-3 py-1.5 rounded-md text-white" @click="handleFetchExcel(1)">Cargar hoja de INPC</button>
                 <button v-if="sheetVisibleIndex !== 2" class="my-4 bg-yellow-400 px-3 py-1.5 rounded-md text-white" @click="handleFetchExcel(2)">Cargar hoja de recargos</button>
             </div>
+            <Store :ground="ground" :years="years" route-name="grounds.balances.store" :id="ground.id" title-button="Guardar cálculo"></Store>
             <ExcelView v-if="sheetVisibleIndex === 1" :sheet-data="sheetData"/>
             <ExcelView v-if="sheetVisibleIndex === 2" :sheet-data="sheetData"/>
         </div>
