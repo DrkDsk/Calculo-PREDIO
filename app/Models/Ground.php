@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Ground extends Model
 {
     use HasFactory;
-    protected $table = 'grounds';
     protected $fillable = ['owner_id', 'direction', 'grant_number', 'square_meter', 'type'];
 
     const TypesAllowed = ['Protección', 'Ornato', 'General', 'Sector Primario'];

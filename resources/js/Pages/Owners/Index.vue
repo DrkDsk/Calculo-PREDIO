@@ -7,13 +7,53 @@ import LinkSuccess from "@/Components/LinkSuccess.vue";
 import LinkButtonInfo3xl from "@/Components/LinkButtonInfo3xl.vue";
 import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
 import {deleteOwner} from "@/utils/handleDeleteService.js";
+import SearchComponent from "@/Components/SearchComponent.vue";
+import {ref} from "vue";
+import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
-    owners : Object
+    owners : Object,
+    perPage : Number,
+    search : String
 })
+
+const owners = ref([]);
+const links = ref({})
+const isSearching = ref(false)
+isSearching.value = props.search.length
+
+links.value = props.owners.meta;
+owners.value = props.owners.data.map((owner) => owner);
 
 const handleDeleteOwner = (owner_id) => {
     deleteOwner(owner_id)
+}
+
+const handleSearchClient = async (search) => {
+    isSearching.value = search.length
+    if (search.length > 0) {
+
+        let params = {
+            search
+        };
+
+        router.get(route('owners.index'), params, {
+            preserveState : true,
+            onSuccess : (response) => {
+                const ownerProp = response.props.owners
+                owners.value = ownerProp.data.map((owner) => owner);
+            }
+        })
+    } else {
+        let  params = {}
+        router.get(route('owners.index'), params, {
+            preserveState : true,
+            onSuccess : (response) => {
+                const ownerProp = response.props.owners
+                owners.value = ownerProp.data.map((owner) => owner);
+            }
+        })
+    }
 }
 
 </script>
@@ -21,95 +61,98 @@ const handleDeleteOwner = (owner_id) => {
 <template>
     <Navbar>
         <div class="mt-3 w-full flex flex-col items-center">
-            <div class="my-4 flex flex-row md:justify-end w-full mr-8">
-                <LinkSuccess4xl :route-name="route('owners.create')" title="Registrar Propietario"></LinkSuccess4xl>
-            </div>
-            <div v-if="owners.data.length" class="w-11/12 flex flex-col">
-                <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
-                    <thead class="text-left uppercase">
-                    <tr class="text-white">
-                        <th scope="col" class="text-center py-4">No.</th>
-                        <th scope="col" class="text-center py-4">Nombre</th>
-                        <th scope="col" class="text-center py-4">Apellidos</th>
-                        <th scope="col" class="text-center py-4">Número telefónico</th>
-                        <th scope="col" class="text-center py-4">RFC</th>
-                        <th scope="col" class="text-center py-4">Terrenos</th>
-                        <th scope="col" class="text-center py-4">Ajustes</th>
-                    </tr>
-                    </thead>
-                    <tbody class="divide-y-8 divide-gray-100 border-gray-100">
-                    <tr v-for="owner in owners.data" class="bg-white" style="border-radius: 10px">
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium text-gray-700">
-                                    {{ owner.id }}
+            <SearchComponent :search-field="props.search" place-holder="Buscar propietario" @search="handleSearchClient"/>
+            <div class="w-11/12 flex flex-col">
+                <div class="flex justify-end my-4">
+                    <LinkSuccess4xl :route-name="route('owners.create')" title="Registrar Propietario"></LinkSuccess4xl>
+                </div>
+                <div v-if="owners.length" class="w-full flex flex-col items-end">
+                    <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
+                        <thead class="text-left uppercase">
+                        <tr class="text-white">
+                            <th scope="col" class="text-center py-4">No.</th>
+                            <th scope="col" class="text-center py-4">Nombre</th>
+                            <th scope="col" class="text-center py-4">Apellidos</th>
+                            <th scope="col" class="text-center py-4">Número telefónico</th>
+                            <th scope="col" class="text-center py-4">RFC</th>
+                            <th scope="col" class="text-center py-4">Terrenos</th>
+                            <th scope="col" class="text-center py-4">Ajustes</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y-8 divide-gray-100 border-gray-100">
+                        <tr v-for="owner in owners" class="bg-white" style="border-radius: 10px">
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium text-gray-700">
+                                        {{ owner.id }}
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium text-gray-700">
-                                    {{ owner.name }}
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium text-gray-700">
+                                        {{ owner.name }}
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium text-gray-700">
-                                    {{ owner.last_name }}
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium text-gray-700">
+                                        {{ owner.last_name }}
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium text-gray-700">
-                                    {{ owner.telephone }}
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium text-gray-700">
+                                        {{ owner.telephone }}
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium text-gray-700" v-if="owner.RFC">
-                                    {{ owner.RFC }}
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium text-gray-700" v-if="owner.RFC">
+                                        {{ owner.RFC }}
+                                    </div>
+                                    <div class="font-medium text-red-400" v-else>
+                                        SIN RFC
+                                    </div>
                                 </div>
-                                <div class="font-medium text-red-400" v-else>
-                                    SIN RFC
-                                </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium flex flex-col gap-3">
-                                    <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver terrenos">
-                                    </LinkSuccess>
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium flex flex-col gap-3">
+                                        <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver terrenos">
+                                        </LinkSuccess>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="text-sm py-2 px-4 text-center">
-                                <div class="font-medium gap-3 flex flex-row justify-center">
-                                    <LinkButtonInfo3xl :route-name="route('owners.edit', owner.id)" title="Editar">
-                                    </LinkButtonInfo3xl>
+                            <td>
+                                <div class="text-sm py-2 px-4 text-center">
+                                    <div class="font-medium gap-3 flex flex-row justify-center">
+                                        <LinkButtonInfo3xl :route-name="route('owners.edit', owner.id)" title="Editar">
+                                        </LinkButtonInfo3xl>
 
-                                    <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
-                                    </ButtonDelete3xl>
+                                        <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
+                                        </ButtonDelete3xl>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <pagination class="my-6 mx-auto" :links="owners.links"></pagination>
-            </div>
-            <div v-else class="h-screen flex items-center justify-center">
-                <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">
-                    <p>Sin registros de propietarios</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <pagination class="my-6" :links="links" v-if="!isSearching"/>
+                </div>
+                <div v-else class="h-screen flex items-center justify-center">
+                    <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">
+                        <p>Sin registros de propietarios</p>
+                    </div>
                 </div>
             </div>
         </div>

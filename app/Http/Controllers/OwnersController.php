@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOwnerRequest;
+use App\Http\Requests\SearchRequest;
+use App\Http\Resources\OwnerResource;
 use App\Models\Owner;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,11 +15,30 @@ class OwnersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(SearchRequest $request): Response
     {
-        $owners = Owner::paginate(10);
+        $search = $request->get('search', '');
+
+        $results = Owner::query();
+        if ($search) {
+            $results->where('name', 'like', '%' . $search . '%')
+                ->orWhere('last_name', 'like', '%' . $search . '%')
+                ->orWhere('telephone', 'like', '%' . $search . '%')
+                ->orWhere('RFC', 'like', '%' . $search . '%');
+
+            return Inertia::render('Owners/Index', [
+                'owners' => OwnerResource::collection(
+                    $results->get()
+                ),
+                'search' => $search,
+            ]);
+        }
+
         return Inertia::render('Owners/Index', [
-            'owners' => $owners
+            'owners' => OwnerResource::collection(
+                $results->paginate(10)
+            ),
+            'search' => $search,
         ]);
     }
 
@@ -72,7 +93,6 @@ class OwnersController extends Controller
     {
         try {
             $owner->delete();
-
             return true;
         } catch (\Exception $exception) {
             return false;
