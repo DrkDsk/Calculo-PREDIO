@@ -24,7 +24,7 @@ class CreateGroundRequest extends FormRequest
     {
         return [
             'direction'    => ['required'],
-            'grant_number' => ['required'],
+            'grant_number' => ['nullable'],
             'square_meter' => ['required'],
             'type' => ['required']
         ];

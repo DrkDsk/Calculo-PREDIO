@@ -28,7 +28,7 @@ class OwnersController extends Controller
 
             return Inertia::render('Owners/Index', [
                 'owners' => OwnerResource::collection(
-                    $results->get()
+                    $results->orderBy('created_at', 'DESC')->get()
                 ),
                 'search' => $search,
             ]);
@@ -36,7 +36,9 @@ class OwnersController extends Controller
 
         return Inertia::render('Owners/Index', [
             'owners' => OwnerResource::collection(
-                $results->paginate(10)
+                $results
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(10)
             ),
             'search' => $search,
         ]);

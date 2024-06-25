@@ -6,6 +6,7 @@ use App\Http\Requests\CreateGroundRequest;
 use App\Http\Requests\SearchRequest;
 use App\Models\Ground;
 use App\Http\Resources\GroundResource;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,7 +25,9 @@ class GroundsController extends Controller
 
             return Inertia::render('Grounds/Index', [
                 'grounds' => GroundResource::collection(
-                    $results->with('owner')->get()
+                    $results->with('owner')
+                        ->orderBy('created_at', 'DESC')
+                        ->get()
                 ),
                 'search' => $search,
             ]);
@@ -32,7 +35,9 @@ class GroundsController extends Controller
 
         return Inertia::render('Grounds/Index', [
             'grounds' => GroundResource::collection(
-                $results->with('owner')->paginate(10)
+                $results->with('owner')
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(10)
             ),
             'search' => $search
         ]);
@@ -47,9 +52,19 @@ class GroundsController extends Controller
         ]);
     }
 
-    public function update(CreateGroundRequest $request, Ground $ground)
+    public function update(CreateGroundRequest $request, Ground $ground): RedirectResponse
     {
         $ground->update($request->validated());
         return redirect()->route('grounds.index');
+    }
+
+    public function show(Ground $ground): Response
+    {
+        $balances = $ground->balances()->paginate(5);
+
+        return Inertia::render('Grounds/Show', [
+            'ground' => new GroundResource($ground),
+            'balances' => $balances,
+        ]);
     }
 }

@@ -61,7 +61,7 @@ const handleSearchOwner = async (search) => {
                             <th scope="col" class="text-center py-4">Apellidos</th>
                             <th scope="col" class="text-center py-4">Número telefónico</th>
                             <th scope="col" class="text-center py-4">RFC</th>
-                            <th scope="col" class="text-center py-4">Terrenos</th>
+                            <th scope="col" class="text-center py-4">Propiedades</th>
                             <th scope="col" class="text-center py-4">Ajustes</th>
                         </tr>
                         </thead>
@@ -113,7 +113,7 @@ const handleSearchOwner = async (search) => {
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
                                     <div class="font-medium flex flex-col gap-3">
-                                        <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver terrenos">
+                                        <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver propiedades">
                                         </LinkSuccess>
                                     </div>
                                 </div>

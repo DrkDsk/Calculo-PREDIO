@@ -51,7 +51,7 @@ const saveOwner = () => {
                     </div>
                     <div class="text-right">
                         <p class="text-2xl">{{groundsCount}}</p>
-                        <p>Terrenos</p>
+                        <p>Propiedades</p>
                     </div>
                 </div>
                 <div

@@ -114,8 +114,11 @@ const handleSearchGround = async (search) => {
 
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium flex flex-row justify-center">
+                                    <div class="font-medium flex flex-row justify-center space-x-2">
                                         <LinkButton3xl :route-name="route('grounds.edit', ground.id)" title="Editar">
+                                        </LinkButton3xl>
+
+                                        <LinkButton3xl :route-name="route('grounds.show', ground.id)" title="cálculos">
                                         </LinkButton3xl>
                                     </div>
                                 </div>
@@ -123,11 +126,11 @@ const handleSearchGround = async (search) => {
                         </tr>
                         </tbody>
                     </table>
-                    <pagination class="my-6 mx-auto" :links="links" v-if="!isSearching"></pagination>
+                    <pagination class="my-6" :links="links" v-if="!isSearching"></pagination>
                 </div>
                 <div v-else class="h-screen flex items-center justify-center">
                     <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">
-                        <p>Sin registros de terrenos</p>
+                        <p>Sin registros de propiedades</p>
                     </div>
                 </div>
             </div>

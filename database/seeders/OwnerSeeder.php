@@ -15,15 +15,15 @@ class OwnerSeeder extends Seeder
     public function run(): void
     {
         Owner::factory()
-            ->count(30)
+            ->count(10)
             ->create()
             ->each(function (Owner $owner) {
                 Ground::factory()
-                    ->count(30)
+                    ->count(2)
                     ->create(['owner_id' => $owner->id])
                     ->each(function (Ground $ground) {
                         Balance::factory()
-                            ->count(1)
+                            ->count(20)
                             ->create(['ground_id' => $ground->id]);
                     })
                 ;
