@@ -91,7 +91,7 @@ const props = defineProps({
                     </tr>
                     </tbody>
                 </table>
-                <pagination class="my-6 mx-auto" :links="grounds.links"></pagination>
+                <pagination class="my-6 mx-auto" :links="grounds"></pagination>
             </div>
             <div v-else class="h-screen flex items-center justify-center">
                 <div class="bg-cyan-800 p-6 rounded-lg text-7xl text-white font-semibold">

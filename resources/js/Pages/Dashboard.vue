@@ -104,7 +104,7 @@ const saveOwner = () => {
                         <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                             <nav aria-label="Table navigation">
                                 <ul class="inline-flex items-center">
-                                    <pagination :links="owners.links"></pagination>
+                                    <pagination :links="owners"></pagination>
                                 </ul>
                             </nav>
                     </span>
