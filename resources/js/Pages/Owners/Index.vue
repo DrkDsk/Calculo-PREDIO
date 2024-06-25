@@ -94,7 +94,7 @@ const handleSearchOwner = async (search) => {
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
                                     <div class="font-medium text-gray-700">
-                                        {{ owner.telephone }}
+                                        {{ owner.telephone ?? "Sin número telefónico" }}
                                     </div>
                                 </div>
                             </td>

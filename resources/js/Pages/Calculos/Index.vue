@@ -100,7 +100,7 @@ const handleDeleteCalculo = (balance_id) => {
                     <p>Sin registros de cálculos</p>
                 </div>
             </div>
-            <pagination class="mt-6" :links="balances.links"></pagination>
+            <pagination class="mt-6" :links="balances"></pagination>
         </div>
     </Navbar>
 </template>
