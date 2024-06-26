@@ -5,6 +5,7 @@ import Store from "@/Pages/Calculos/Store.vue";
 import ExcelView from "@/Components/ExcelView.vue";
 import {ref} from "vue";
 import {fetchExcel} from "@/utils/excel.js";
+import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
     ground : Object,
@@ -14,10 +15,16 @@ const props = defineProps({
 
 const sheetVisibleIndex = ref(0)
 const sheetData = ref([])
+const balancesNotExists = ref(false)
 
 const handleFetchExcel = async (sheetIndex) => {
-    sheetData.value = await fetchExcel(sheetIndex, props.excelUrl)
-    sheetVisibleIndex.value = sheetIndex
+    if (props.excelUrl) {
+        sheetData.value = await fetchExcel(sheetIndex, props.excelUrl)
+        sheetVisibleIndex.value = sheetIndex
+        return ;
+    }
+
+    return balancesNotExists.value = true
 }
 
 </script>
@@ -31,6 +38,11 @@ const handleFetchExcel = async (sheetIndex) => {
             </div>
             <Store :ground="ground" :years="years" route-name="grounds.balances.store" :id="ground.id" title-button="Guardar cálculo"></Store>
             <div class="my-4">
+                <div v-if="balancesNotExists" class="w-1/2">
+                    <p  class="cursor-pointer bottom-3 right-3 bg-red-600 px-5 py-1 font-semibold text-white rounded-xl">
+                        Archivo no importado: <Link class="text-white underline" :href="route('files.create')">Cargar archivo</Link>
+                    </p>
+                </div>
                 <ExcelView v-if="sheetVisibleIndex === 1" :sheet-data="sheetData"/>
                 <ExcelView v-if="sheetVisibleIndex === 2" :sheet-data="sheetData"/>
             </div>

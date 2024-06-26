@@ -9,6 +9,7 @@ use App\Http\Controllers\OwnerGroundsController;
 use App\Http\Controllers\GroundsController;
 use App\Http\Controllers\BalancesController;
 use App\Http\Controllers\SurchargeController;
+use App\Http\Controllers\FileSystemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::resource('owners.grounds', OwnerGroundsController::class)->only(['index',
 Route::resource('grounds.balances', GroundBalanceController::class)->only(['index', 'create', 'store']);
 Route::resource('balances', BalancesController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('surcharge', SurchargeController::class)->only(['index', 'create', 'store']);
+Route::resource('files', FileSystemController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

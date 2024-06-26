@@ -6,6 +6,7 @@ use App\Http\Requests\SaveBalanceRequest;
 use App\Models\Balance;
 use App\Models\Ground;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,7 +18,12 @@ class GroundBalanceController extends Controller
      */
     public function create(Ground $ground): Response
     {
-        $assetExcel = asset('storage/excel/CALCULO ZOFEMAT 2024.xlsx');
+        $files = Storage::files('public/excel');
+        $assetExcel = null;
+
+        if (count($files)) {
+            $assetExcel = asset(Storage::url($files[0]));
+        }
 
         return Inertia::render('Calculos/Create', [
             'ground' => $ground,
