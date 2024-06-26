@@ -185,7 +185,6 @@ const saveOperation = () => {
                                     <option value="12">Diciembre</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
                     <div class="relative">

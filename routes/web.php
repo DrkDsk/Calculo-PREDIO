@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroundBalanceController;
 use App\Http\Controllers\OwnersController;
@@ -31,6 +32,7 @@ Route::resource('grounds.balances', GroundBalanceController::class)->only(['inde
 Route::resource('balances', BalancesController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('surcharge', SurchargeController::class)->only(['index', 'create', 'store']);
 Route::resource('files', FileSystemController::class)->only(['create', 'store']);
+Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
