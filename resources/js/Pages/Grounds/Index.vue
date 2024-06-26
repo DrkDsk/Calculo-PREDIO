@@ -73,8 +73,8 @@ const handleSearchGround = async (search) => {
 
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.grant_number }}
+                                    <div class="font-medium" :class="ground.grant_number ? 'text-gray-700' : 'text-red-600'">
+                                        {{ ground.grant_number  ?? "Sin número de Concesión"}}
                                     </div>
                                 </div>
                             </td>

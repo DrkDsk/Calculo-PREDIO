@@ -37,8 +37,8 @@ const handleDeleteCalculo = (balance_id) => {
                         <tr v-for="balance in balances.data" class="bg-white" style="border-radius: 10px">
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ balance.ground.grant_number }}
+                                    <div class="font-medium" :class="balance.ground.grant_number ? 'text-gray-700' : 'text-red-600'">
+                                        {{ balance.ground.grant_number ?? "Sin número de Concesión" }}
                                     </div>
                                 </div>
                             </td>

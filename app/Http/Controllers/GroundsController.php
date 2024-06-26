@@ -67,4 +67,15 @@ class GroundsController extends Controller
             'balances' => $balances,
         ]);
     }
+
+    public function destroy(Ground $ground): bool
+    {
+        try {
+            $ground->delete();
+            return true;
+        }
+        catch (\Exception $e) {
+            return false;
+        }
+    }
 }

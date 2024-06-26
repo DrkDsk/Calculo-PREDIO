@@ -93,7 +93,7 @@ const handleSearchOwner = async (search) => {
 
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
+                                    <div class="font-medium" :class="owner.telephone ? 'text-gray-700' : 'text-red-600'">
                                         {{ owner.telephone ?? "Sin número telefónico" }}
                                     </div>
                                 </div>
@@ -122,11 +122,8 @@ const handleSearchOwner = async (search) => {
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
                                     <div class="font-medium gap-3 flex flex-row justify-center">
-                                        <LinkButton3xl :route-name="route('owners.edit', owner.id)" title="Editar">
-                                        </LinkButton3xl>
-
-                                        <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar">
-                                        </ButtonDelete3xl>
+                                        <LinkButton3xl :route-name="route('owners.edit', owner.id)" title="Editar"/>
+                                        <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar"/>
                                     </div>
                                 </div>
                             </td>

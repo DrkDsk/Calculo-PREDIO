@@ -3,6 +3,13 @@ import Navbar from "@/Layouts/Navbar.vue";
 import LinkButtonSuccess4xl from "@/Components/LinkButtonSuccess4xl.vue";
 import LinkButtonInfo3xl from "@/Components/LinkButton3xl.vue";
 import Pagination from "@/Layouts/Pagination.vue";
+import LinkButton3xl from "@/Components/LinkButton3xl.vue";
+import ButtonDelete3xl from "@/Components/ButtonDelete3xl.vue";
+import {deleteGround} from "@/utils/handleDeleteService.js";
+
+const handleDeleteGround = (owner_id) => {
+    deleteGround(owner_id)
+}
 
 const props = defineProps({
     grounds : Object,
@@ -28,8 +35,7 @@ const props = defineProps({
                             <th scope="col" class="text-center py-4">Número de Concesión</th>
                             <th scope="col" class="text-center py-4">Metros cuadrados</th>
                             <th scope="col" class="text-center py-4">Tipo</th>
-                            <th scope="col" class="text-center py-4">Propietario</th>
-                            <th scope="col" class="text-center py-4">Cálculo INCP</th>
+                            <th scope="col" class="text-center py-4">Opciones</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y-8 divide-gray-100 border-gray-100">
@@ -51,8 +57,8 @@ const props = defineProps({
 
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.grant_number }}
+                                    <div class="font-medium" :class="ground.grant_number ? 'text-gray-700' : 'text-red-600'">
+                                        {{ ground.grant_number  ?? "Sin número de Concesión"}}
                                     </div>
                                 </div>
                             </td>
@@ -74,18 +80,11 @@ const props = defineProps({
                             </td>
 
                             <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.owner.name }} {{ground.owner.last_name}}
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center items-center mx-auto flex flex-row justify-center">
+                                <div class="text-sm py-2 text-center items-center flex flex-row justify-center">
                                     <div class="font-medium gap-3 flex flex-row justify-center w-full">
-                                        <LinkButtonInfo3xl :route-name="route('grounds.balances.create', ground.id)" title="Realizar cálculo">
-                                        </LinkButtonInfo3xl>
+                                        <LinkButtonInfo3xl :route-name="route('grounds.balances.create', ground.id)" title="realizar cálculo"/>
+                                        <LinkButton3xl :route-name="route('grounds.edit', ground.id)" title="Editar"/>
+                                        <ButtonDelete3xl @delete="handleDeleteGround(ground.id)" title="Eliminar"/>
                                     </div>
                                 </div>
                             </td>

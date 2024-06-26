@@ -25,7 +25,7 @@ const formCalculation = useForm({
 })
 
 const recargo = computed(() => {
-    let tasaRecargo = formCalculation.tasaDeRecargo
+    let tasaRecargo = formCalculation.tasaDeRecargo / 100
 
     if (!tasaRecargo) {
         return 0;

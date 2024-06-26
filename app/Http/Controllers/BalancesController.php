@@ -13,7 +13,9 @@ class BalancesController extends Controller
     public function index() : Response
     {
         return Inertia::render('Calculos/Index', [
-            'balances' => Balance::with('ground')->paginate(10)
+            'balances' => Balance::with('ground')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10)
         ]);
     }
 
