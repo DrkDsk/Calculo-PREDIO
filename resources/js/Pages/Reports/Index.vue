@@ -55,7 +55,7 @@ const handleSubmit = () => {
                         <SubmitButton title="Filtrar"/>
                     </div>
                 </form>
-                <div class="grid grid-cols-3 gap-3 rounded-md" v-if="balances.length">
+                <div class="grid grid-cols-3 gap-3 rounded-md" v-if="balances && balances.length">
                     <BalanceReportCardItem v-for="balance in balances" :label="balance.label" :value="balance.value"/>
                 </div>
             </div>
