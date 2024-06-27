@@ -2,7 +2,7 @@
 
 defineProps({
     label: String,
-    value: String
+    value: Number
 })
 
 </script>
