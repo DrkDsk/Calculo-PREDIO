@@ -64,7 +64,7 @@ const saveOwner = () => {
                     </div>
                     <div class="text-right">
                         <p class="text-2xl">${{fullBalance}}</p>
-                        <p>Balances</p>
+                        <p>Suma de total a pagar</p>
                     </div>
                 </div>
             </div>

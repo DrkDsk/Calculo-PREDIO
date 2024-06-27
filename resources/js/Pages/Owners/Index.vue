@@ -56,7 +56,6 @@ const handleSearchOwner = async (search) => {
                     <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
                         <thead class="text-left uppercase">
                         <tr class="text-white">
-                            <th scope="col" class="text-center py-4">No.</th>
                             <th scope="col" class="text-center py-4">Nombre</th>
                             <th scope="col" class="text-center py-4">Apellidos</th>
                             <th scope="col" class="text-center py-4">Número telefónico</th>
@@ -67,13 +66,6 @@ const handleSearchOwner = async (search) => {
                         </thead>
                         <tbody class="divide-y-8 divide-gray-100 border-gray-100">
                         <tr v-for="owner in owners" class="bg-white" style="border-radius: 10px">
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ owner.id }}
-                                    </div>
-                                </div>
-                            </td>
 
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">

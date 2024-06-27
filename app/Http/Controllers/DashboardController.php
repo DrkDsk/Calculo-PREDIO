@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard', [
-            'owners'       => Owner::paginate(10),
+            'owners'       => Owner::orderBy('created_at', 'DESC')->paginate(10),
             'groundsCount' => Ground::count(),
             'fullBalance'  => round(Balance::sum('amount_to_pay'),2)
         ]);

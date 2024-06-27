@@ -59,6 +59,15 @@ import {Link} from '@inertiajs/vue3';
                         </li>
 
                         <li>
+                            <Link :href="route('reports.index')"  class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="20" height="20" viewBox="0 0 36 36"><rect x="6.48" y="18" width="5.76" height="11.52" rx="1" ry="1"/><rect x="15.12" y="6.48" width="5.76" height="23.04" rx="1" ry="1"/><rect x="23.76" y="14.16" width="5.76" height="15.36" rx="1" ry="1"/></svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Reportes</span>
+                            </Link>
+                        </li>
+
+                        <li>
                             <Link :href="route('files.create')"  class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,15 +75,6 @@ import {Link} from '@inertiajs/vue3';
                                     </svg>
                                 </span>
                                 <span class="ml-2 text-sm tracking-wide truncate">Archivos</span>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link :href="route('reports.index')"  class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
-                                <span class="inline-flex justify-center items-center ml-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="20" height="20" viewBox="0 0 36 36"><rect x="6.48" y="18" width="5.76" height="11.52" rx="1" ry="1"/><rect x="15.12" y="6.48" width="5.76" height="23.04" rx="1" ry="1"/><rect x="23.76" y="14.16" width="5.76" height="15.36" rx="1" ry="1"/></svg>
-                                </span>
-                                <span class="ml-2 text-sm tracking-wide truncate">Reportes</span>
                             </Link>
                         </li>
 

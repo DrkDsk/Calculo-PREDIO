@@ -30,7 +30,6 @@ const props = defineProps({
                     <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg">
                         <thead class="text-left uppercase">
                         <tr class="text-white">
-                            <th scope="col" class="text-center py-4">No.</th>
                             <th scope="col" class="text-center py-4">Dirección</th>
                             <th scope="col" class="text-center py-4">Número de Concesión</th>
                             <th scope="col" class="text-center py-4">Metros cuadrados</th>
@@ -40,13 +39,6 @@ const props = defineProps({
                         </thead>
                         <tbody class="divide-y-8 divide-gray-100 border-gray-100">
                         <tr v-for="ground in grounds.data" class="bg-white" style="border-radius: 10px">
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.id }}
-                                    </div>
-                                </div>
-                            </td>
                             <td>
                                 <div class="text-sm py-2 px-4 text-center">
                                     <div class="font-medium text-gray-700">
@@ -81,7 +73,7 @@ const props = defineProps({
 
                             <td>
                                 <div class="text-sm py-2 text-center items-center flex flex-row justify-center">
-                                    <div class="font-medium gap-3 flex flex-row justify-center w-full">
+                                    <div class="font-medium gap-3 flex flex-row justify-center w-full items-center">
                                         <LinkButtonInfo3xl :route-name="route('grounds.balances.create', ground.id)" title="realizar cálculo"/>
                                         <LinkButton3xl :route-name="route('grounds.edit', ground.id)" title="Editar"/>
                                         <ButtonDelete3xl @delete="handleDeleteGround(ground.id)" title="Eliminar"/>
