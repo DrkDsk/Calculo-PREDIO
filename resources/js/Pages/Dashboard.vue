@@ -78,6 +78,7 @@ const saveOwner = () => {
                             <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:0 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Propietario</th>
                                 <th class="px-4 py-3">Número Telefónico</th>
+                                <th class="px-4 py-3">Número Telefónico secundario</th>
                                 <th class="px-4 py-3">RFC</th>
                             </tr>
                             </thead>
@@ -90,7 +91,12 @@ const saveOwner = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-3 text-sm">{{owner.telephone}}</td>
+                                    <td class="px-4 py-3 text-sm" :class="owner.telephone ? 'text-gray-400' : 'text-red-600'">
+                                        {{owner.telephone ?? "Sin número telefónico"}}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm" :class="owner.secondary_phonenumber ? 'text-gray-400' : 'text-red-600'">
+                                        {{owner.secondary_phonenumber ?? "Sin número telefónico"}}
+                                    </td>
                                     <td class="px-4 py-3 text-xs">
                                         <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> {{owner.RFC}} </span>
                                     </td>
