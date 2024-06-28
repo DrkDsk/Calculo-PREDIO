@@ -8,6 +8,7 @@ const formOwner = useForm({
     name : '',
     last_name : '',
     telephone : '',
+    secondary_phonenumber : '',
     RFC : ''
 })
 
@@ -47,6 +48,10 @@ const ableToSave = computed(() => {
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Número telefónico</label>
                             <input type="tel" minlength="10" maxlength="10" v-model="formOwner.telephone" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
+                        </div>
+                        <div class="relative">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Segundo número telefónico (Opcional)</label>
+                            <input type="tel" minlength="10" maxlength="10" v-model="formOwner.secondary_phonenumber" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos secundario">
                         </div>
                         <div class="relative">
                             <button :disabled="!ableToSave" :class="ableToSave ? 'bg-blue-600 hover:bg-blue-500' : 'bg-gray-400 hover:bg-gray-500'" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-white transition duration-200 rounded-lg ease">Guardar</button>

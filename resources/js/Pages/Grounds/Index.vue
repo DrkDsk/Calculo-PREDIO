@@ -41,83 +41,85 @@ const handleSearchGround = async (search) => {
             <SearchComponent :search-field="props.search" place-holder="Buscar propiedad" @search="handleSearchGround"/>
             <div class="w-11/12 flex flex-col mt-4">
                 <div v-if="grounds.length" class="w-full flex flex-col items-end">
-                    <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
-                        <thead class="text-left uppercase">
-                        <tr class="text-white">
-                            <th scope="col" class="text-center py-4">Dirección</th>
-                            <th scope="col" class="text-center py-4">Número de Concesión</th>
-                            <th scope="col" class="text-center py-4">Metros cuadrados</th>
-                            <th scope="col" class="text-center py-4">Tipo</th>
-                            <th scope="col" class="text-center py-4">Propietario</th>
-                            <th scope="col" class="text-center py-4">Cálculo INCP</th>
-                            <th scope="col" class="text-center py-4">Opciones</th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y-8 divide-gray-100 border-gray-100">
-                        <tr v-for="ground in grounds" class="bg-white" style="border-radius: 10px">
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.direction }}
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
+                            <thead class="text-left uppercase">
+                            <tr class="text-white">
+                                <th scope="col" class="text-center py-4">Dirección</th>
+                                <th scope="col" class="text-center py-4">Número de Concesión</th>
+                                <th scope="col" class="text-center py-4">Metros cuadrados</th>
+                                <th scope="col" class="text-center py-4">Tipo</th>
+                                <th scope="col" class="text-center py-4">Propietario</th>
+                                <th scope="col" class="text-center py-4">Cálculo INCP</th>
+                                <th scope="col" class="text-center py-4">Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody class="divide-y-8 divide-gray-100 border-gray-100">
+                            <tr v-for="ground in grounds" class="bg-white" style="border-radius: 10px">
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700">
+                                            {{ ground.direction }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium" :class="ground.grant_number ? 'text-gray-700' : 'text-red-600'">
-                                        {{ ground.grant_number  ?? "Sin número de Concesión"}}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium" :class="ground.grant_number ? 'text-gray-700' : 'text-red-600'">
+                                            {{ ground.grant_number  ?? "Sin número de Concesión"}}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.square_meter }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700">
+                                            {{ ground.square_meter }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.type }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700">
+                                            {{ ground.type }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ ground.owner.name }} {{ground.owner.last_name}}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700">
+                                            {{ ground.owner.name }} {{ground.owner.last_name}}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium flex flex-row justify-center gap-3">
-                                        <LinkButton3xl :route-name="route('grounds.balances.create', ground.id)" title="Realizar cálculo">
-                                        </LinkButton3xl>
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium flex flex-row justify-center gap-3">
+                                            <LinkButton3xl :route-name="route('grounds.balances.create', ground.id)" title="Realizar cálculo">
+                                            </LinkButton3xl>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium flex flex-row justify-center space-x-2">
-                                        <LinkButton3xl :route-name="route('grounds.edit', ground.id)" title="Editar">
-                                        </LinkButton3xl>
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium flex flex-row justify-center space-x-2">
+                                            <LinkButton3xl :route-name="route('grounds.edit', ground.id)" title="Editar">
+                                            </LinkButton3xl>
 
-                                        <LinkButton3xl :route-name="route('grounds.show', ground.id)" title="cálculos">
-                                        </LinkButton3xl>
+                                            <LinkButton3xl :route-name="route('grounds.show', ground.id)" title="cálculos">
+                                            </LinkButton3xl>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <pagination class="my-6" :links="links" v-if="!isSearching"></pagination>
                 </div>
                 <div v-else class="h-screen flex items-center justify-center">

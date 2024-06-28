@@ -12,6 +12,7 @@ const formOwner = useForm({
     name : props.owner.name,
     last_name : props.owner.last_name,
     telephone : props.owner.telephone,
+    secondary_phonenumber: props.owner.secondary_phonenumber,
     RFC : props.owner.RFC
 })
 
@@ -43,6 +44,11 @@ const updateOwner = () => {
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Número telefónico</label>
                             <input type="tel" minlength="10" maxlength="10" v-model="formOwner.telephone" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos">
+                        </div>
+
+                        <div class="relative">
+                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Número telefónico secudario (Opcional)</label>
+                            <input type="tel" minlength="10" maxlength="10" v-model="formOwner.secondary_phonenumber" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ingresa un número telefónico de 10 dígitos secundario">
                         </div>
                         <div class="relative">
                             <SubmitButton title="Actualizar"/>

@@ -39,7 +39,7 @@ const handleFetchExcel = async (sheetIndex) => {
             <Store :ground="ground" :years="years" route-name="grounds.balances.store" :id="ground.id" title-button="Guardar cálculo"></Store>
             <div class="my-4">
                 <div v-if="balancesNotExists" class="w-1/2">
-                    <p  class="cursor-pointer bottom-3 right-3 bg-red-600 px-5 py-1 font-semibold text-white rounded-xl">
+                    <p class="bottom-3 right-3 bg-red-600 px-5 py-1 font-semibold text-white rounded-xl">
                         Archivo no importado: <Link class="text-white underline" :href="route('files.create')">Cargar archivo</Link>
                     </p>
                 </div>

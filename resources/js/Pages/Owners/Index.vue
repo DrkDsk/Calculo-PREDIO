@@ -53,75 +53,77 @@ const handleSearchOwner = async (search) => {
                     <LinkSuccess4xl :route-name="route('owners.create')" title="Registrar Propietario"></LinkSuccess4xl>
                 </div>
                 <div v-if="owners.length" class="w-full flex flex-col items-end">
-                    <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
-                        <thead class="text-left uppercase">
-                        <tr class="text-white">
-                            <th scope="col" class="text-center py-4">Nombre</th>
-                            <th scope="col" class="text-center py-4">Apellidos</th>
-                            <th scope="col" class="text-center py-4">Número telefónico</th>
-                            <th scope="col" class="text-center py-4">RFC</th>
-                            <th scope="col" class="text-center py-4">Propiedades</th>
-                            <th scope="col" class="text-center py-4">Ajustes</th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y-8 divide-gray-100 border-gray-100">
-                        <tr v-for="owner in owners" class="bg-white" style="border-radius: 10px">
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full text-sm table-auto font-bold bg-cyan-900 rounded-lg mb-3">
+                            <thead class="text-left uppercase">
+                            <tr class="text-white">
+                                <th scope="col" class="text-center py-4">Nombre</th>
+                                <th scope="col" class="text-center py-4">Número telefónico</th>
+                                <th scope="col" class="text-center py-4">Número telefónico secundario</th>
+                                <th scope="col" class="text-center py-4">RFC</th>
+                                <th scope="col" class="text-center py-4">Propiedades</th>
+                                <th scope="col" class="text-center py-4">Ajustes</th>
+                            </tr>
+                            </thead>
+                            <tbody class="divide-y-8 divide-gray-100 border-gray-100">
+                            <tr v-for="owner in owners" class="bg-white" style="border-radius: 10px">
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ owner.name }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700">
+                                            {{ owner.name }}  {{owner.last_name}}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700">
-                                        {{ owner.last_name }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium" :class="owner.telephone ? 'text-gray-700' : 'text-red-600'">
+                                            {{ owner.telephone ?? "Sin número telefónico" }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium" :class="owner.telephone ? 'text-gray-700' : 'text-red-600'">
-                                        {{ owner.telephone ?? "Sin número telefónico" }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium" :class="owner.secondary_phonenumber ? 'text-gray-700' : 'text-red-600'">
+                                            {{ owner.secondary_phonenumber ?? "Sin número telefónico" }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium text-gray-700" v-if="owner.RFC">
-                                        {{ owner.RFC }}
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium text-gray-700" v-if="owner.RFC">
+                                            {{ owner.RFC }}
+                                        </div>
+                                        <div class="font-medium text-red-400" v-else>
+                                            SIN RFC
+                                        </div>
                                     </div>
-                                    <div class="font-medium text-red-400" v-else>
-                                        SIN RFC
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium flex flex-col gap-3">
-                                        <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver propiedades">
-                                        </LinkSuccess>
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium flex flex-col gap-3">
+                                            <LinkSuccess class="text-green-500" :route-name="route('owners.grounds.index', owner.id)" title="Ver propiedades">
+                                            </LinkSuccess>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="text-sm py-2 px-4 text-center">
-                                    <div class="font-medium gap-3 flex flex-row justify-center">
-                                        <LinkButton3xl :route-name="route('owners.edit', owner.id)" title="Editar"/>
-                                        <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar"/>
+                                <td>
+                                    <div class="text-sm py-2 px-4 text-center">
+                                        <div class="font-medium gap-3 flex flex-row justify-center">
+                                            <LinkButton3xl :route-name="route('owners.edit', owner.id)" title="Editar"/>
+                                            <ButtonDelete3xl @delete="handleDeleteOwner(owner.id)" title="Eliminar"/>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <pagination class="my-6" :links="links" v-if="!isSearching"/>
                 </div>
                 <div v-else class="h-screen flex items-center justify-center">

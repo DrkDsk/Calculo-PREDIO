@@ -150,7 +150,7 @@ const saveOperation = () => {
                                 <label class="font-medium text-gray-600 bg-white">Mes del cálculo</label>
                                 <select v-model="formCalculation.current_month"
                                         class="w-full block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                    <option selected>Selecciona el mes del cálculo</option>
+                                    <option disabled selected>Selecciona el mes del cálculo</option>
                                     <option value="1">Enero</option>
                                     <option value="2">Febrero</option>
                                     <option value="3">Marzo</option>
@@ -170,7 +170,7 @@ const saveOperation = () => {
                                 <label class="font-medium text-gray-600 bg-white">Mes que se debió pagar</label>
                                 <select v-model="formCalculation.month_of_pay"
                                         class="w-full block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                                    <option selected>Selecciona el mes en que se debió pagar</option>
+                                    <option disabled selected>Selecciona el mes en que se debió pagar</option>
                                     <option value="1">Enero</option>
                                     <option value="2">Febrero</option>
                                     <option value="3">Marzo</option>

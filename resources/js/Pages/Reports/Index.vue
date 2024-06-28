@@ -36,7 +36,7 @@ const handleSubmit = () => {
                         <label class="rounded-md -mt-3 font-medium text-gray-600">Mes que pagaron</label>
                         <select v-model="formCalculation.month_at_operation_date"
                                 class="w-full block px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black">
-                            <option selected>Selecciona el mes</option>
+                            <option disabled selected>Selecciona el mes</option>
                             <option value="Enero">Enero</option>
                             <option value="Febrero">Febrero</option>
                             <option value="Marzo">Marzo</option>
