@@ -22,21 +22,21 @@ class ReportsController extends Controller
                 [
                   'label' => 'Total de importe a pagar:',
                   'value' => round(
-                      Balance::where('due_payment_year', $duePaymentYear)
+                      Balance::where('year_at_operation_date', $duePaymentYear)
                           ->where('month_at_operation_date', $monthAtOperationDate)
                           ->sum('amount_to_pay'),2),
                 ],
                 [
                     'label' => 'Total de recargos:',
                     'value' => round(
-                        Balance::where('due_payment_year', $duePaymentYear)
+                        Balance::where('year_at_operation_date', $duePaymentYear)
                             ->where('month_at_operation_date', $monthAtOperationDate)
                             ->sum('surcharge'),2)
                 ],
                 [
                     'label' => 'Total de actualizaciones:',
                     'value' => round(
-                        Balance::where('due_payment_year', $duePaymentYear)
+                        Balance::where('year_at_operation_date', $duePaymentYear)
                             ->where('month_at_operation_date', $monthAtOperationDate)
                             ->sum('updated_charge'),2)
                 ]
