@@ -31,8 +31,8 @@ const handleDeleteCalculo = (balance_id) => {
                                 <th scope="col" class="text-center py-4 px-4">Actualización</th>
                                 <th scope="col" class="text-center py-4 px-4">Recargo</th>
                                 <th scope="col" class="text-center py-4 px-4">Total</th>
-                                <th scope="col" class="text-center py-4 px-4">Año que debió pagar</th>
-                                <th scope="col" class="text-center py-4 px-4">Mes que debió pagar</th>
+                                <th scope="col" class="text-center py-4 px-4">Año que se pagó</th>
+                                <th scope="col" class="text-center py-4 px-4">Mes que se pagó</th>
                                 <th scope="col" class="text-center py-4">Opciones</th>
                             </tr>
                             </thead>
@@ -89,7 +89,7 @@ const handleDeleteCalculo = (balance_id) => {
                                 <td>
                                     <div class="text-sm py-2 px-4 text-center">
                                         <div class="font-medium text-gray-700">
-                                            {{ balance.due_payment_year }}
+                                            {{ balance.year_at_operation_date }}
                                         </div>
                                     </div>
                                 </td>
@@ -97,7 +97,7 @@ const handleDeleteCalculo = (balance_id) => {
                                 <td>
                                     <div class="text-sm py-2 px-4 text-center">
                                         <div class="font-medium text-gray-700">
-                                            {{ balance.month_of_pay }}
+                                            {{ balance.month_at_operation_date }}
                                         </div>
                                     </div>
                                 </td>
