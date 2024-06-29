@@ -97,8 +97,8 @@ const saveOwner = () => {
                                     <td class="px-4 py-3 text-sm" :class="owner.secondary_phonenumber ? 'text-gray-400' : 'text-red-600'">
                                         {{owner.secondary_phonenumber ?? "Sin número telefónico"}}
                                     </td>
-                                    <td class="px-4 py-3 text-xs">
-                                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> {{owner.RFC}} </span>
+                                    <td class="px-4 py-3 text-xs" :class="owner.RFC ? 'text-white' : 'text-red-200'">
+                                        <span class="px-2 py-1 font-semibold leading-tight bg-green-100 rounded-full dark:bg-green-700"> {{owner.RFC ?? "Sin RFC"}} </span>
                                     </td>
                                 </tr>
                             </tbody>
